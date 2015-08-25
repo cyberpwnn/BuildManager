@@ -1,0 +1,6 @@
+main: com.ulticraft.buildmanager.BuildManager
+name: BuildManager
+version: 1.0
+commands: 
+  buildmanager:
+    aliases: bm
