@@ -1,6 +1,7 @@
 package com.ulticraft.buildmanager;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Logger;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -526,6 +527,38 @@ public class BuildManager extends JavaPlugin
 				}
 			}
 			
+			else if(args[0].equals("setdeadline"))
+			{
+				if(bg.isManager(sender.getName()))
+				{
+					Build selected = bg.getBuild(bg.getManager(sender.getName()).getSelected());
+					if(selected == null)
+					{
+						message(sender, ChatColor.RED + "No build selected");
+						return true;
+					}
+					
+					if(args.length == 2)
+					{
+						int d = Integer.valueOf(args[1]);
+						
+						selected.setDeadline(new Date(d * 1000 * 60 * 60 * 24 + new Date().getTime()));
+						
+						message(sender, ChatColor.RED + "Due Date set " + d + " days from now.");
+					}
+					
+					else
+					{
+						message(sender, ChatColor.GREEN + "/bm setdeadline <days from now>");
+					}
+				}
+				
+				else
+				{
+					message(sender, ChatColor.RED + "You aren't a manager!");
+				}
+			}
+			
 			else if(args[0].equals("q"))
 			{
 				if(!(args.length >= 2))
@@ -583,7 +616,36 @@ public class BuildManager extends JavaPlugin
 								desc = "No Description :[";
 							}
 							
-							new RawText().addTextWithHoverCommand(" " + b.getTitle() + " ", RawText.COLOR_GREEN, "/bm q build " + i, b.getDescription(), RawText.COLOR_GREEN).addTextWithHover(cont + " Builders ", RawText.COLOR_AQUA, cm, RawText.COLOR_AQUA).tellRawTo(this, (Player) sender);
+							String dd = "No Deadline";
+							String rt;
+							
+							if(b.getDeadline() != null)
+							{
+								dd = b.getDeadline().format();
+							}
+							
+							if(dd.equals("LATE"))
+							{
+								rt = RawText.COLOR_RED;
+							}
+							
+							else if(dd.equalsIgnoreCase("No Deadline"))
+							{
+								rt = RawText.COLOR_GREEN;
+							}
+							
+							else
+							{
+								rt = RawText.COLOR_YELLOW;
+							}
+							
+							if(b.isFinished())
+							{
+								rt = RawText.COLOR_GREEN;
+								dd = "Completed";
+							}
+							
+							new RawText().addTextWithHoverCommand(" " + b.getTitle() + " ", RawText.COLOR_GREEN, "/bm q build " + i, b.getDescription(), RawText.COLOR_GREEN).addTextWithHover(cont + " Builders ", RawText.COLOR_AQUA, cm, RawText.COLOR_AQUA).addText(dd, rt).tellRawTo(this, (Player) sender);
 						}
 						
 						return true;
@@ -643,7 +705,36 @@ public class BuildManager extends JavaPlugin
 								cm = "No Builders :[";
 							}
 							
-							new RawText().addTextWithHoverCommand(" " + b.getTitle() + " ", RawText.COLOR_GREEN, "/bm q build " + b.getId(), b.getDescription(), RawText.COLOR_GREEN).addTextWithHover(cont + " Builders ", RawText.COLOR_AQUA, cm, RawText.COLOR_AQUA).tellRawTo(this, (Player) sender);
+							String dd = "No Deadline";
+							String rt;
+							
+							if(b.getDeadline() != null)
+							{
+								dd = b.getDeadline().format();
+							}
+							
+							if(dd.equals("LATE"))
+							{
+								rt = RawText.COLOR_RED;
+							}
+							
+							else if(dd.equalsIgnoreCase("No Deadline"))
+							{
+								rt = RawText.COLOR_GREEN;
+							}
+							
+							else
+							{
+								rt = RawText.COLOR_YELLOW;
+							}
+							
+							if(b.isFinished())
+							{
+								rt = RawText.COLOR_GREEN;
+								dd = "Completed";
+							}
+							
+							new RawText().addTextWithHoverCommand(" " + b.getTitle() + " ", RawText.COLOR_GREEN, "/bm q build " + b.getId(), b.getDescription(), RawText.COLOR_GREEN).addTextWithHover(cont + " Builders ", RawText.COLOR_AQUA, cm, RawText.COLOR_AQUA).addText(dd, rt).tellRawTo(this, (Player) sender);
 						}
 					}
 					
@@ -694,7 +785,82 @@ public class BuildManager extends JavaPlugin
 								desc = "No Description :[";
 							}
 							
-							new RawText().addTextWithHoverCommand(" " + b.getTitle() + " ", RawText.COLOR_GREEN, "/bm q build " + b.getId(), b.getDescription(), RawText.COLOR_GREEN).addTextWithHover(cont + " Builders ", RawText.COLOR_AQUA, cm, RawText.COLOR_AQUA).tellRawTo(this, (Player) sender);
+							String dd = "No Deadline";
+							String rt;
+							
+							if(b.getDeadline() != null)
+							{
+								dd = b.getDeadline().format();
+							}
+							
+							if(dd.equals("LATE"))
+							{
+								rt = RawText.COLOR_RED;
+							}
+							
+							else if(dd.equalsIgnoreCase("No Deadline"))
+							{
+								rt = RawText.COLOR_GREEN;
+							}
+							
+							else
+							{
+								rt = RawText.COLOR_YELLOW;
+							}
+							
+							if(b.isFinished())
+							{
+								rt = RawText.COLOR_GREEN;
+								dd = "Completed";
+							}
+							
+							new RawText().addTextWithHoverCommand(" " + b.getTitle() + " ", RawText.COLOR_GREEN, "/bm q build " + b.getId(), b.getDescription(), RawText.COLOR_GREEN).addTextWithHover(cont + " Builders ", RawText.COLOR_AQUA, cm, RawText.COLOR_AQUA).addText(dd, rt).tellRawTo(this, (Player) sender);
+						}
+					}
+					
+					else if(args[1].equals("build"))
+					{
+						if(args.length == 3)
+						{
+							int id = Integer.valueOf(args[2]);
+							
+							if(bg.getBuild(id) != null)
+							{
+								Build b = bg.getBuild(id);
+								
+								String dd = "No Deadline";
+								String rt;
+								
+								if(b.getDeadline() != null)
+								{
+									dd = b.getDeadline().format();
+								}
+								
+								if(dd.equals("LATE"))
+								{
+									rt = RawText.COLOR_RED;
+								}
+								
+								else if(dd.equalsIgnoreCase("No Deadline"))
+								{
+									rt = RawText.COLOR_GREEN;
+								}
+								
+								else
+								{
+									rt = RawText.COLOR_YELLOW;
+								}
+								
+								if(b.isFinished())
+								{
+									rt = RawText.COLOR_GREEN;
+									dd = "Completed";
+								}
+								
+								message(sender, Final.HR);
+								new RawText().addTextWithHover("                    " + b.getTitle(), RawText.COLOR_AQUA, b.getDescription(), RawText.COLOR_GREEN).addText(" " + dd, rt).tellRawTo(this, (Player) sender);
+								message(sender, Final.HR);
+							}
 						}
 					}
 				}
