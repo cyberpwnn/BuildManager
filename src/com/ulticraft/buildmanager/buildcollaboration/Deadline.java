@@ -18,4 +18,14 @@ public class Deadline implements Serializable
 	{
 		return duration;
 	}
+	
+	public boolean isLate()
+	{
+		if(duration.getTotalDuration() <= 0)
+		{
+			return true;
+		}
+		
+		return false;
+	}
 }

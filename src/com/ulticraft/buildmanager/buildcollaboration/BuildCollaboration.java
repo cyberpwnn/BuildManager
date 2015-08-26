@@ -9,11 +9,47 @@ public class BuildCollaboration implements Serializable
 	
 	private ArrayList<Manager> managers;
 	private ArrayList<Builder> builders;
-	private ArrayList<Assignment> assignments;
 	
 	public BuildCollaboration()
 	{
+		managers = new ArrayList<Manager>();
+		builders = new ArrayList<Builder>();
+	}
+	
+	public Builder getBuilder(String name)
+	{
+		for(Builder i : builders)
+		{
+			if(i.getName().equals(name))
+			{
+				return i;
+			}
+		}
 		
+		return null;
+	}
+	
+	public Manager getManager(String name)
+	{
+		for(Manager i : managers)
+		{
+			if(i.getName().equals(name))
+			{
+				return i;
+			}
+		}
+		
+		return null;
+	}
+	
+	public boolean isBuilder(String name)
+	{
+		return getBuilder(name) != null;
+	}
+	
+	public boolean isManager(String name)
+	{
+		return getManager(name) != null;
 	}
 	
 	public void addManager(Manager manager)
@@ -54,20 +90,5 @@ public class BuildCollaboration implements Serializable
 	public void setBuilders(ArrayList<Builder> builders)
 	{
 		this.builders = builders;
-	}
-	
-	public ArrayList<Assignment> getAssignments()
-	{
-		return assignments;
-	}
-	
-	public void assign(Assignment assignment)
-	{
-		assignments.add(assignment);
-	}
-	
-	public void unassign(Assignment assignment)
-	{
-		assignments.remove(assignment);
 	}
 }
