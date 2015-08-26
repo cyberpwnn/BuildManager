@@ -3,6 +3,7 @@ package com.ulticraft.buildmanager;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -11,8 +12,10 @@ import com.ulticraft.buildmanager.group.Build;
 import com.ulticraft.buildmanager.group.BuildGroup;
 import com.ulticraft.buildmanager.group.Builder;
 import com.ulticraft.buildmanager.group.Manager;
+import com.ulticraft.buildmanager.group.SerializableLocation;
 import com.ulticraft.buildmanager.group.Status;
 import com.ulticraft.core.PlayerUtils;
+import com.ulticraft.core.RawText;
 
 public class BuildManager extends JavaPlugin
 {
@@ -50,7 +53,7 @@ public class BuildManager extends JavaPlugin
 			{
 				if(bg.isManager(sender.getName()))
 				{
-					message(sender, "Your a manager");
+					sendBuilds((Player) sender);
 				}
 				
 				else if(bg.isBuilder(sender.getName()))
@@ -155,7 +158,7 @@ public class BuildManager extends JavaPlugin
 			
 			else if(args[0].equals("addbuilder") || args[0].equals("+builder"))
 			{
-				if(sender.hasPermission(Final.PERM_MASTER))
+				if(bg.isManager(sender.getName()))
 				{
 					if(args.length != 2)
 					{
@@ -185,13 +188,13 @@ public class BuildManager extends JavaPlugin
 				
 				else
 				{
-					message(sender, ChatColor.RED + "You do not have permission for that!");
+					message(sender, ChatColor.RED + "You aren't a build manager!");
 				}
 			}
 			
 			else if(args[0].equals("delbuilder") || args[0].equals("-builder"))
 			{
-				if(sender.hasPermission(Final.PERM_MASTER))
+				if(bg.isManager(sender.getName()))
 				{
 					if(args.length != 2)
 					{
@@ -227,7 +230,7 @@ public class BuildManager extends JavaPlugin
 				
 				else
 				{
-					message(sender, ChatColor.RED + "You do not have permission for that!");
+					message(sender, ChatColor.RED + "You aren't a build manager!");
 				}
 			}
 			
@@ -252,7 +255,10 @@ public class BuildManager extends JavaPlugin
 							return true;
 						}
 						
-						bg.addBuild(new Build(bg.newBuildId(), name, "", new ArrayList<Status>(), ((Player) sender).getLocation()));
+						Location l = ((Player) sender).getLocation();
+						SerializableLocation s = new SerializableLocation(l.getBlockX(), l.getBlockY(), l.getBlockZ(), l.getPitch(), l.getYaw(), l.getWorld().getName());
+						
+						bg.addBuild(new Build(bg.newBuildId(), name, "", new ArrayList<Status>(), s));
 						message(sender, ChatColor.AQUA + "Created new Build " + ChatColor.GREEN + name);
 					}
 					
@@ -346,6 +352,20 @@ public class BuildManager extends JavaPlugin
 				}
 			}
 			
+			else if(args[0].equals("unselect"))
+			{
+				if(bg.isManager(sender.getName()))
+				{
+					bg.getManager(sender.getName()).setSelected(0);
+					message(sender, ChatColor.AQUA + "Unselected Build");
+				}
+				
+				else
+				{
+					message(sender, ChatColor.RED + "You aren't a manager!");
+				}
+			}
+			
 			else if(args[0].equals("assign"))
 			{
 				if(bg.isManager(sender.getName()))
@@ -382,12 +402,18 @@ public class BuildManager extends JavaPlugin
 						
 						bg.getBuilder(fp.getName()).addAssigned(selected);
 						message(sender, ChatColor.AQUA + fp.getName() + " has been assigned to " + ChatColor.GREEN + selected.getTitle());
+						bg.getManager(sender.getName()).addManagedBuild(selected);
 					}
 					
 					else
 					{
 						message(sender, ChatColor.RED + fp.getName() + " is not a builder!");
 					}
+				}
+				
+				else
+				{
+					message(sender, ChatColor.RED + "You aren't a manager!");
 				}
 			}
 			
@@ -426,7 +452,8 @@ public class BuildManager extends JavaPlugin
 						}
 						
 						bg.getBuilder(fp.getName()).delAssigned(selected);
-						message(sender, ChatColor.AQUA + fp.getName() + " has been removed from " + ChatColor.GREEN + selected.getTitle());
+						message(sender, ChatColor.AQUA + fp.getName() + " removed from " + ChatColor.GREEN + selected.getTitle());
+						bg.getManager(sender.getName()).delManagedBuild(selected);
 					}
 					
 					else
@@ -434,10 +461,267 @@ public class BuildManager extends JavaPlugin
 						message(sender, ChatColor.RED + fp.getName() + " is not a builder!");
 					}
 				}
+				
+				else
+				{
+					message(sender, ChatColor.RED + "You aren't a manager!");
+				}
+			}
+			
+			else if(args[0].equals("finished"))
+			{
+				if(bg.isManager(sender.getName()))
+				{
+					Build selected = bg.getBuild(bg.getManager(sender.getName()).getSelected());
+					if(selected == null)
+					{
+						message(sender, ChatColor.RED + "No build selected");
+						return true;
+					}
+					
+					if(selected.isFinished())
+					{
+						message(sender, ChatColor.RED + "Build was already finished! Use /bm reopen");
+					}
+					
+					else
+					{
+						selected.setFinished(true);
+						message(sender, ChatColor.GREEN + selected.getTitle() + ChatColor.AQUA + " build finished!");
+					}
+				}
+				
+				else
+				{
+					message(sender, ChatColor.RED + "You aren't a manager!");
+				}
+			}
+			
+			else if(args[0].equals("reopen"))
+			{
+				if(bg.isManager(sender.getName()))
+				{
+					Build selected = bg.getBuild(bg.getManager(sender.getName()).getSelected());
+					if(selected == null)
+					{
+						message(sender, ChatColor.RED + "No build selected");
+						return true;
+					}
+					
+					if(!selected.isFinished())
+					{
+						message(sender, ChatColor.RED + "Build is still open!");
+					}
+					
+					else
+					{
+						selected.setFinished(false);
+						message(sender, ChatColor.GREEN + selected.getTitle() + ChatColor.AQUA + " has been reopened!");
+					}
+				}
+				
+				else
+				{
+					message(sender, ChatColor.RED + "You aren't a manager!");
+				}
+			}
+			
+			else if(args[0].equals("q"))
+			{
+				if(!(args.length >= 2))
+				{
+					message(sender, ChatColor.RED + "Use /bm and CLICK the colored elements! /bm q <element>");
+					return true;
+				}
+				
+				if(bg.isManager(sender.getName()))
+				{
+					if(args[1].equals("assigned"))
+					{
+						for(int i : bg.getManager(sender.getName()).getManaging())
+						{
+							Build b = bg.getBuild(i);
+							String desc = b.getDescription();
+							int cont = 0;
+							String cm = "";
+							int mi = 0;
+							
+							for(Builder j : bg.getBuilders())
+							{
+								if(j.getAssigned().contains(i))
+								{
+									cont++;
+									mi++;
+									
+									if(mi < 5)
+									{
+										if(mi == 4)
+										{
+											cm = cm + j.getName();
+										}
+										
+										else
+										{
+											cm = cm + j.getName() + ", ";
+										}
+									}
+								}
+							}
+							
+							if(cm.substring(cm.length()-2, cm.length()).equals(", "))
+							{
+								cm = cm.substring(0, cm.length()-2);
+							}
+							
+							if(cont > 4)
+							{
+								cm = cm + " + " + cont + " more";
+							}
+							
+							if(desc == null || desc.equals(""))
+							{
+								desc = "No Description :[";
+							}
+							
+							new RawText().addTextWithHoverCommand(" " + b.getTitle() + " ", RawText.COLOR_GREEN, "/bm q build " + i, b.getDescription(), RawText.COLOR_GREEN).addTextWithHover(cont + " Builders ", RawText.COLOR_AQUA, cm, RawText.COLOR_AQUA).tellRawTo(this, (Player) sender);
+						}
+						
+						return true;
+					}
+				}
+				
+				if(bg.isBuilder(sender.getName()))
+				{
+					if(args[1].equals("builds"))
+					{
+						for(Build b : bg.getBuilds())
+						{
+							String desc = b.getDescription();
+							int cont = 0;
+							String cm = "";
+							int mi = 0;
+							
+							for(Builder j : bg.getBuilders())
+							{
+								if(j.getAssigned().contains(b.getId()))
+								{
+									cont++;
+									mi++;
+									
+									if(mi < 5)
+									{
+										if(mi == 4)
+										{
+											cm = cm + j.getName();
+										}
+										
+										else
+										{
+											cm = cm + j.getName() + ", ";
+										}
+									}
+								}
+							}
+							
+							if(cm.length() > 2 && cm.substring(cm.length()-2, cm.length()).equals(", "))
+							{
+								cm = cm.substring(0, cm.length()-2);
+							}
+							
+							if(cont > 4)
+							{
+								cm = cm + " + " + cont + " more";
+							}
+							
+							if(desc == null || desc.equals(""))
+							{
+								desc = "No Description :[";
+							}
+							
+							if(cm == "")
+							{
+								cm = "No Builders :[";
+							}
+							
+							new RawText().addTextWithHoverCommand(" " + b.getTitle() + " ", RawText.COLOR_GREEN, "/bm q build " + b.getId(), b.getDescription(), RawText.COLOR_GREEN).addTextWithHover(cont + " Builders ", RawText.COLOR_AQUA, cm, RawText.COLOR_AQUA).tellRawTo(this, (Player) sender);
+						}
+					}
+					
+					else if(args[1].equals("mybuilds"))
+					{
+						for(int i : bg.getBuilder(sender.getName()).getAssigned())
+						{
+							Build b = bg.getBuild(i);
+							String desc = b.getDescription();
+							int cont = 0;
+							String cm = "";
+							int mi = 0;
+							
+							for(Builder j : bg.getBuilders())
+							{
+								if(j.getAssigned().contains(b.getId()))
+								{
+									cont++;
+									mi++;
+									
+									if(mi < 5)
+									{
+										if(mi == 4)
+										{
+											cm = cm + j.getName();
+										}
+										
+										else
+										{
+											cm = cm + j.getName() + ", ";
+										}
+									}
+								}
+							}
+							
+							if(cm.substring(cm.length()-2, cm.length()).equals(", "))
+							{
+								cm = cm.substring(0, cm.length()-2);
+							}
+							
+							if(cont > 4)
+							{
+								cm = cm + " + " + cont + " more";
+							}
+							
+							if(desc == null || desc.equals(""))
+							{
+								desc = "No Description :[";
+							}
+							
+							new RawText().addTextWithHoverCommand(" " + b.getTitle() + " ", RawText.COLOR_GREEN, "/bm q build " + b.getId(), b.getDescription(), RawText.COLOR_GREEN).addTextWithHover(cont + " Builders ", RawText.COLOR_AQUA, cm, RawText.COLOR_AQUA).tellRawTo(this, (Player) sender);
+						}
+					}
+				}
+				
+				else
+				{
+					message(sender, ChatColor.RED + "You aren't a builder or manager!");
+				}
 			}
 		}
 		
 		return false;
+	}
+	
+	public void sendBuilds(Player p)
+	{
+		if(bg.isManager(p.getName()))
+		{
+			p.sendMessage(Final.HR);
+			new RawText().addTextWithHoverCommand("         Builds ", RawText.COLOR_GREEN, "/bm q builds", bg.getBuilds().size() + " Total Builds", RawText.COLOR_DARK_GREEN).addTextWithHoverCommand("Assigned ", RawText.COLOR_YELLOW, "/bm q assigned", bg.getManager(p.getName()).getManaging().size() + " Assigned", RawText.COLOR_GOLD).addTextWithHoverCommand("My Builds", RawText.COLOR_AQUA, "/bm q mybuilds", bg.getBuilder(p.getName()).getAssigned().size() + " Builds", RawText.COLOR_AQUA).tellRawTo(this, p);
+			p.sendMessage(Final.HR);
+		}
+		
+		else if(bg.isManager(p.getName()))
+		{
+			
+		}
 	}
 	
 	public void info(String msg)

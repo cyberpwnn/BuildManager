@@ -48,7 +48,7 @@ public class Manager implements Serializable
 	
 	public void delManagedBuild(Build build)
 	{
-		managing.remove(build.getId());
+		managing.remove(new Integer(build.getId()));
 	}
 
 	public ArrayList<Integer> getManaging()

@@ -1,7 +1,6 @@
 package com.ulticraft.buildmanager.group;
 
 import java.io.Serializable;
-import org.bukkit.Location;
 
 public class Status implements Serializable
 {
@@ -9,7 +8,7 @@ public class Status implements Serializable
 	
 	private String description;
 	private String name;
-	private Location location;
+	private SerializableLocation location;
 	
 	public Status(String description, String name)
 	{
@@ -37,12 +36,12 @@ public class Status implements Serializable
 		this.name = name;
 	}
 
-	public Location getLocation()
+	public SerializableLocation getLocation()
 	{
 		return location;
 	}
 
-	public void setLocation(Location location)
+	public void setLocation(SerializableLocation location)
 	{
 		this.location = location;
 	}

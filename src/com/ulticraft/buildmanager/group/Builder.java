@@ -80,7 +80,7 @@ public class Builder implements Serializable
 	
 	public void delAssigned(Build build)
 	{
-		assigned.remove(build.getId());
+		assigned.remove(new Integer(build.getId()));
 	}
 	
 	public void addTaken(Build build)
@@ -90,7 +90,7 @@ public class Builder implements Serializable
 	
 	public void delTaken(Build build)
 	{
-		taken.remove(build.getId());
+		taken.remove(new Integer(build.getId()));
 	}
 	
 	public void addFinished(Build build)
@@ -100,7 +100,7 @@ public class Builder implements Serializable
 	
 	public void delFinished(Build build)
 	{
-		finished.remove(build.getId());
+		finished.remove(new Integer(build.getId()));
 	}
 	
 	public boolean isAssigned(Build build)

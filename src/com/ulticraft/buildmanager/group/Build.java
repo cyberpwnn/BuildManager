@@ -2,7 +2,6 @@ package com.ulticraft.buildmanager.group;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import org.bukkit.Location;
 
 public class Build implements Serializable
 {
@@ -12,15 +11,18 @@ public class Build implements Serializable
 	private String title;
 	private String description;
 	private ArrayList<Status> updates;
-	private Location location;
+	private SerializableLocation location;
+	//private Duration deadline;
+	private boolean finished;
 	
-	public Build(int id, String title, String description, ArrayList<Status> updates, Location location)
+	public Build(int id, String title, String description, ArrayList<Status> updates, SerializableLocation location)
 	{
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.updates = updates;
 		this.location = location;
+		this.finished = false;
 	}
 
 	public int getId()
@@ -68,13 +70,41 @@ public class Build implements Serializable
 		updates.add(status);
 	}
 
-	public Location getLocation()
+	public SerializableLocation getLocation()
 	{
 		return location;
 	}
 
-	public void setLocation(Location location)
+	public void setLocation(SerializableLocation location)
 	{
 		this.location = location;
 	}
+
+	public boolean isFinished()
+	{
+		return finished;
+	}
+
+	public void setFinished(boolean finished)
+	{
+		this.finished = finished;
+	}
+
+//	public String getDeadline()
+//	{
+//		if(deadline == null)
+//		{
+//			return "\u221E";
+//		}
+//		
+//		else
+//		{
+//			return deadline.shortDescription();
+//		}
+//	}
+//
+//	public void setDeadline(Duration deadline)
+//	{
+//		this.deadline = deadline;
+//	}
 }
