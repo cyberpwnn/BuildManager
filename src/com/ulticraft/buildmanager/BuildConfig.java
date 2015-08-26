@@ -3,45 +3,49 @@ package com.ulticraft.buildmanager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import com.ulticraft.buildmanager.buildcollaboration.BuildCollaboration;
+import com.ulticraft.buildmanager.group.BuildGroup;
 
 public class BuildConfig
 {
 	private File file;
-	private BuildManager plugin;
-
+	
 	public BuildConfig(BuildManager plugin)
 	{
 		file = new File(plugin.getDataFolder(), "builds.bmc");
-		this.plugin = plugin;
 		
-		if(file.exists())
+		if(!plugin.getDataFolder().exists())
 		{
-			BuildCollaboration bm = load();
-			
-			if(bm != null)
-			{
-				plugin.setBuildCollaboration(bm);
-			}
+			plugin.getDataFolder().mkdir();
 		}
-
-		else
+		
+		if(!file.exists())
 		{
-			save();
+			try
+			{
+				file.createNewFile();
+			}
+			
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+			
+			save(new BuildGroup());
 		}
 	}
 	
-	public void save()
+	public void save(BuildGroup bh)
 	{
 		try
 		{
 			FileOutputStream fout = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
 
-			oos.writeObject(plugin.getBuildCollaboration());
+			oos.writeObject(bh);
 
 			oos.close();
 
@@ -53,15 +57,14 @@ public class BuildConfig
 		}
 	}
 	
-	public BuildCollaboration load()
+	public BuildGroup load()
 	{
 		try
 		{
-
 			FileInputStream fin = new FileInputStream(file);
 			ObjectInputStream ois = new ObjectInputStream(fin);
 
-			BuildCollaboration tbm = (BuildCollaboration) ois.readObject();
+			BuildGroup tbm = (BuildGroup) ois.readObject();
 			
 			ois.close();
 			
