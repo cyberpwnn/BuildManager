@@ -886,7 +886,9 @@ public class BuildManager extends JavaPlugin
 		
 		else if(bg.isManager(p.getName()))
 		{
-			
+			p.sendMessage(Final.HR);
+			new RawText().addTextWithHoverCommand("              Builds ", RawText.COLOR_GREEN, "/bm q builds", bg.getBuilds().size() + " Total Builds", RawText.COLOR_DARK_GREEN).addTextWithHoverCommand("My Builds", RawText.COLOR_AQUA, "/bm q mybuilds", bg.getBuilder(p.getName()).getAssigned().size() + " Builds", RawText.COLOR_AQUA).tellRawTo(this, p);
+			p.sendMessage(Final.HR);
 		}
 	}
 	
