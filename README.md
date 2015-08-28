@@ -3,4 +3,4 @@ Build Constructivley, not destructivley! With the BuildManager, you can assign m
 The Build Manager uses the chat Json features a lot, meaning you can click on buttons to navigate where you want. This makes it very easy to use without the hassle of too many commands.
 
 #Downloads
-BuildManager v1.0.6 (https://github.com/danielmills/BuildManager/blob/master/build/BuildManager.jar?raw=true)
+[RELEASE v1.0.6] (https://github.com/danielmills/BuildManager/blob/master/build/BuildManager.jar?raw=true)
