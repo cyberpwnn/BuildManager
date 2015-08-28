@@ -85,13 +85,13 @@ public class BuildManager extends JavaPlugin
 		}
 	}
 
-	public void notifyBuilders(Build build, String msg)
+	public void notifyBuilders(Build build, String msg, String name)
 	{
 		for(Builder i : bg.getBuilders())
 		{
 			for(Player j : getServer().getOnlinePlayers())
 			{
-				if(j.getUniqueId().toString().equals(i.getUuid()) && i.getAssigned().contains(new Integer(build.getId())))
+				if(j.getUniqueId().toString().equals(i.getUuid()) && i.getAssigned().contains(new Integer(build.getId())) && !j.getName().equals(name))
 				{
 					j.sendMessage(Final.TAG + msg);
 				}
@@ -130,7 +130,7 @@ public class BuildManager extends JavaPlugin
 				}
 			}
 
-			else if(args[0].equals("addmanager") || args[0].equals("+manager"))
+			else if(args[0].equals("addmanager") || args[0].equals("+manager") || args[0].equals("+m"))
 			{
 				if(sender.hasPermission(Final.PERM_MASTER))
 				{
@@ -175,7 +175,7 @@ public class BuildManager extends JavaPlugin
 				}
 			}
 
-			else if(args[0].equals("delmanager") || args[0].equals("-manager"))
+			else if(args[0].equals("delmanager") || args[0].equals("-manager") || args[0].equals("-m"))
 			{
 				if(sender.hasPermission(Final.PERM_MASTER))
 				{
@@ -566,7 +566,7 @@ public class BuildManager extends JavaPlugin
 					{
 						selected.setFinished(true);
 						message(sender, ChatColor.GREEN + selected.getTitle() + ChatColor.AQUA + " build finished!");
-						notifyBuilders(selected, ChatColor.GREEN + sender.getName() + " marked " + ChatColor.AQUA + selected.getTitle() + ChatColor.GREEN + " as Finished!");
+						notifyBuilders(selected, ChatColor.GREEN + sender.getName() + " marked " + ChatColor.AQUA + selected.getTitle() + ChatColor.GREEN + " as Finished!", sender.getName());
 					}
 				}
 
@@ -596,7 +596,7 @@ public class BuildManager extends JavaPlugin
 					{
 						selected.setFinished(false);
 						message(sender, ChatColor.GREEN + selected.getTitle() + ChatColor.AQUA + " has been reopened!");
-						notifyBuilders(selected, ChatColor.GREEN + sender.getName() + " re-opened " + ChatColor.AQUA + selected.getTitle());
+						notifyBuilders(selected, ChatColor.GREEN + sender.getName() + " re-opened " + ChatColor.AQUA + selected.getTitle(), sender.getName());
 					}
 				}
 
@@ -622,7 +622,7 @@ public class BuildManager extends JavaPlugin
 						selected.setDeadline(new Deadline(args[1], sender));
 
 						message(sender, ChatColor.GREEN + "Due Date set to " + selected.getDeadline().format());
-						notifyBuilders(selected, ChatColor.GREEN + sender.getName() + " set " + ChatColor.AQUA + selected.getTitle() + ChatColor.GREEN + " due on " + selected.getDeadline().format());
+						notifyBuilders(selected, ChatColor.GREEN + sender.getName() + " set " + ChatColor.AQUA + selected.getTitle() + ChatColor.GREEN + " due on " + selected.getDeadline().format(), sender.getName());
 					}
 
 					else
@@ -666,7 +666,7 @@ public class BuildManager extends JavaPlugin
 
 					selected.setDescription(name);
 					message(sender, ChatColor.GREEN + "Set description to " + ChatColor.AQUA + name);
-					notifyBuilders(selected, ChatColor.GREEN + sender.getName() + " changed " + ChatColor.AQUA + selected.getTitle() + ChatColor.GREEN + " description.");
+					notifyBuilders(selected, ChatColor.GREEN + sender.getName() + " changed " + ChatColor.AQUA + selected.getTitle() + ChatColor.GREEN + " description.", sender.getName());
 				}
 
 				else
@@ -693,7 +693,7 @@ public class BuildManager extends JavaPlugin
 					selected.setLocation(s);
 
 					message(sender, ChatColor.GREEN + "Set warp to " + ChatColor.AQUA + s.toString());
-					notifyBuilders(selected, ChatColor.GREEN + sender.getName() + " changed " + ChatColor.AQUA + selected.getTitle() + ChatColor.GREEN + " warp.");
+					notifyBuilders(selected, ChatColor.GREEN + sender.getName() + " changed " + ChatColor.AQUA + selected.getTitle() + ChatColor.GREEN + " warp.", sender.getName());
 				}
 
 				else

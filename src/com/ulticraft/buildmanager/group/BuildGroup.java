@@ -132,7 +132,7 @@ public class BuildGroup implements Serializable
 		{
 			Build i = (Build) iterator.next();
 			
-			if(i.getTitle().equals(title))
+			if(i.getTitle().equalsIgnoreCase(title))
 			{
 				builds.remove(i);
 				break;
@@ -146,7 +146,7 @@ public class BuildGroup implements Serializable
 		{
 			System.out.println(i.getTitle());
 			
-			if(i.getTitle().equals(title))
+			if(i.getTitle().equalsIgnoreCase(title))
 			{
 				return i;
 			}
