@@ -21,7 +21,6 @@ package jxl.biff.formula;
 
 import java.util.Stack;
 
-import jxl.common.Logger;
 
 import jxl.WorkbookSettings;
 import jxl.biff.IntegerHelper;
@@ -35,7 +34,6 @@ class VariableArgFunction extends Operator implements ParsedThing
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(VariableArgFunction.class);
 
   /**
    * The function

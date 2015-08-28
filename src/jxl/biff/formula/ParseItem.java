@@ -19,7 +19,6 @@
 
 package jxl.biff.formula;
 
-import jxl.common.Logger;
 
 /**
  * Abstract base class for an item in a formula parse tree
@@ -27,7 +26,6 @@ import jxl.common.Logger;
 abstract class ParseItem
 {
   // The logger
-  private static Logger logger = Logger.getLogger(ParseItem.class);
 
   /**
    * The parent of this parse item

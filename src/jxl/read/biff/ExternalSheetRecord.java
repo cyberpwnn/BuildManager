@@ -19,7 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
 
 import jxl.WorkbookSettings;
 import jxl.biff.IntegerHelper;
@@ -34,7 +33,6 @@ public class ExternalSheetRecord extends RecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(ExternalSheetRecord.class);
 
   /**
    * Dummy indicators for overloading the constructor
@@ -96,8 +94,6 @@ public class ExternalSheetRecord extends RecordData
     if (data.length < numxtis * 6 + 2)
     {
       xtiArray = new XTI[0];
-      logger.warn("Could not process external sheets.  Formulas may " +
-                  "be compromised.");
       return;
     }
 
@@ -126,7 +122,6 @@ public class ExternalSheetRecord extends RecordData
   {
     super(t);
 
-    logger.warn("External sheet record for Biff 7 not supported");
   }
 
   /**

@@ -23,7 +23,6 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import jxl.common.Logger;
 
 import jxl.CellType;
 import jxl.DateCell;
@@ -41,7 +40,6 @@ public abstract class DateRecord extends CellValue
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(DateRecord.class);
 
   /**
    * The excel value of the date

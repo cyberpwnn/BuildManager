@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.Cell;
 import jxl.Range;
@@ -62,7 +61,6 @@ public class WorkbookParser extends Workbook
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(WorkbookParser.class);
 
   /**
    * The excel file
@@ -438,7 +436,6 @@ public class WorkbookParser extends Workbook
     }
 
     // An unknown supbook - return unkown
-    logger.warn("Unknown Supbook 3");
     return "[UNKNOWN]";
   }
 
@@ -493,7 +490,6 @@ public class WorkbookParser extends Workbook
     }
 
     // An unknown supbook - return unkown
-    logger.warn("Unknown Supbook 4");
     return "[UNKNOWN]";
   }
 
@@ -883,7 +879,6 @@ public class WorkbookParser extends Workbook
       }
       else
       {
-        logger.warn("BOF is unrecognized");
 
 
         while (excelFile.hasNext() && r.getType() != Type.EOF)
@@ -916,7 +911,6 @@ public class WorkbookParser extends Workbook
 
       if (nr.getBuiltInName() == null)
       {
-        logger.warn("Usage of a local non-builtin name");
       } 
       else if (nr.getBuiltInName() == BuiltInName.PRINT_AREA || 
                nr.getBuiltInName() == BuiltInName.PRINT_TITLES)

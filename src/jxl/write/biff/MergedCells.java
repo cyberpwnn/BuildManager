@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
-
 import jxl.Cell;
 import jxl.CellType;
 import jxl.Range;
@@ -44,7 +42,6 @@ class MergedCells
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(MergedCells.class);
 
   /**
    * The list of merged cells
@@ -212,8 +209,6 @@ class MergedCells
         
         if (range.intersects(r))
         {
-          logger.warn("Could not merge cells " + r +
-                      " as they clash with an existing set of merged cells.");
 
           intersects = true;
         }
@@ -261,9 +256,7 @@ class MergedCells
               }
               else
               {
-                logger.warn("Range " + range + 
-                            " contains more than one data cell.  " +
-                            "Setting the other cells to blank.");
+              
                 Blank b = new Blank(c, r);
                 sheet.addCell(b);
               }

@@ -19,7 +19,6 @@
 
 package jxl.biff.drawing;
 
-import jxl.common.Logger;
 
 /**
  * The base class for all escher records.  This class contains
@@ -31,7 +30,6 @@ abstract class EscherRecord
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(EscherRecord.class);
 
   /**
    * The escher data

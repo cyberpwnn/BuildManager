@@ -19,7 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
 
 import jxl.biff.IntegerHelper;
 import jxl.biff.RecordData;
@@ -32,7 +31,6 @@ public class RowRecord extends RecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(RowRecord.class);
 
   /**
    * The number of this row

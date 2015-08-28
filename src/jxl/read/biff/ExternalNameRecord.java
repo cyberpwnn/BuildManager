@@ -19,7 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
 
 import jxl.WorkbookSettings;
 import jxl.biff.IntegerHelper;
@@ -35,7 +34,6 @@ public class ExternalNameRecord extends RecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(ExternalNameRecord.class);
 
   /**
    * The name

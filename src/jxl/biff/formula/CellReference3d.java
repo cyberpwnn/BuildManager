@@ -19,8 +19,6 @@
 
 package jxl.biff.formula;
 
-import jxl.common.Logger;
-
 import jxl.Cell;
 
 import jxl.biff.CellReferenceHelper;
@@ -34,7 +32,6 @@ class CellReference3d extends Operand implements ParsedThing
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(CellReference3d.class);
 
   /**
    * Indicates whether the column reference is relative or absolute

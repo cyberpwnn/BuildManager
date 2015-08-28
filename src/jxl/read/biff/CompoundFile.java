@@ -22,7 +22,6 @@ package jxl.read.biff;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import jxl.common.Logger;
 
 import jxl.WorkbookSettings;
 import jxl.biff.BaseCompoundFile;
@@ -37,7 +36,6 @@ public final class CompoundFile extends BaseCompoundFile
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(CompoundFile.class);
 
   /**
    * The original OLE stream, organized into blocks, which can
@@ -227,7 +225,6 @@ public final class CompoundFile extends BaseCompoundFile
     // simply warn and return
     if (sbdBlock == -1)
     {
-      logger.warn("invalid small block depot number");
       return;
     }
 
@@ -281,15 +278,11 @@ public final class CompoundFile extends BaseCompoundFile
         if (ps.type == ROOT_ENTRY_PS_TYPE)
         {
           ps.name = ROOT_ENTRY_NAME;
-          logger.warn("Property storage name for " + ps.type + 
-                      " is empty - setting to " + ROOT_ENTRY_NAME);
         } 
         else
         {
           if (ps.size != 0)
           {
-            logger.warn("Property storage type " + ps.type + 
-                        " is non-empty and has no associated name");
           }
         }
       }
@@ -443,7 +436,6 @@ public final class CompoundFile extends BaseCompoundFile
 
     if (multiple)
     {
-      logger.warn("found multiple copies of property set " + name);
     }
 
     if (!found)
@@ -495,7 +487,6 @@ public final class CompoundFile extends BaseCompoundFile
 
     if (block != -2 && count == numBlocks)
     {
-      logger.warn("Property storage size inconsistent with block chain.");
     }
 
     return streamData;
@@ -532,7 +523,6 @@ public final class CompoundFile extends BaseCompoundFile
 
       if (block == -1)
       {
-        logger.warn("Incorrect terminator for small block stream " + ps.name);
         block = -2; // kludge to force the loop termination
       }
     }

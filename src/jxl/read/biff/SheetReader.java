@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.Cell;
 import jxl.CellFeatures;
@@ -77,7 +76,6 @@ final class SheetReader
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(SheetReader.class);
 
   /**
    * The excel file
@@ -307,8 +305,6 @@ final class SheetReader
         StringBuffer sb = new StringBuffer();
         CellReferenceHelper.getCellReference
           (cell.getColumn(), cell.getRow(), sb);
-        logger.warn("Cell " + sb.toString() +
-                    " already contains data");
       }
       cells[cell.getRow()][cell.getColumn()] = cell;
     }
@@ -377,17 +373,14 @@ final class SheetReader
 
       if (type == Type.UNKNOWN && r.getCode() == 0)
       {
-        logger.warn("Biff code zero found");
 
         // Try a dimension record
         if (r.getLength() == 0xa)
         {
-          logger.warn("Biff code zero found - trying a dimension record.");
           r.setType(Type.DIMENSION);
         }
         else
         {
-          logger.warn("Biff code zero found - Ignoring.");
         }
       }
 
@@ -579,8 +572,6 @@ final class SheetReader
 
           if (comment == null)
           {
-            logger.warn(" cannot find comment for note id " +
-                        nr.getObjectId() + "...ignoring");
           }
           else
           {
@@ -609,8 +600,6 @@ final class SheetReader
       {
         if (sharedFormula == null)
         {
-          logger.warn("Shared template formula is null - " +
-                      "trying most recent formula template");
           SharedFormulaRecord lastSharedFormula =
             (SharedFormulaRecord) sharedFormulas.get(sharedFormulas.size() - 1);
 
@@ -685,10 +674,6 @@ final class SheetReader
           catch (FormulaException e)
           {
             // Something has gone wrong trying to read the formula data eg. it
-            // might be unsupported biff7 data
-            logger.warn
-              (CellReferenceHelper.getCellReference
-               (cell.getColumn(), cell.getRow()) + " " + e.getMessage());
           }
         }
       }
@@ -1002,8 +987,6 @@ final class SheetReader
           }
           else
           {
-            logger.warn("object id " + dvlr.getObjectId() + " referenced " +
-                        " by data validity list record not found - ignoring");
           }
         }
       }
@@ -1037,7 +1020,6 @@ final class SheetReader
           }
           else
           {
-            logger.warn("cannot add data validity settings");
           }
         }
       }
@@ -1052,7 +1034,6 @@ final class SheetReader
           // a drawing record
           if (msoRecord == null && continueRecord != null)
           {
-            logger.warn("Cannot find drawing record - using continue record");
             msoRecord = new MsoDrawingRecord(continueRecord.getRecord());
             continueRecord = null;
           }
@@ -1127,7 +1108,6 @@ final class SheetReader
         {
           if (!workbook.getWorkbookBof().isBiff8())
           {
-            logger.warn("only biff8 charts are supported");
           }
           else
           {
@@ -1209,7 +1189,6 @@ final class SheetReader
     // Check that the comments hash is empty
     if (!comments.isEmpty())
     {
-      logger.warn("Not all comments have a corresponding Note record");
     }
   }
 
@@ -1284,10 +1263,6 @@ final class SheetReader
     catch (FormulaException e)
     {
       // Something has gone wrong trying to read the formula data eg. it
-      // might be unsupported biff7 data
-      logger.warn
-        (CellReferenceHelper.getCellReference(fr.getColumn(), fr.getRow()) + 
-         " " + e.getMessage());
 
       return null;
     }
@@ -1492,8 +1467,6 @@ final class SheetReader
     Cell c = cells[row][col];
     if (c == null)
     {
-      logger.warn("Cell at " + CellReferenceHelper.getCellReference(col, row) +
-                  " not present - adding a blank");
       MulBlankCell mbc = new MulBlankCell(row,
                                           col,
                                           0,
@@ -1522,9 +1495,6 @@ final class SheetReader
     }
     else
     {
-      logger.warn("Not able to add comment to cell type " +
-                  c.getClass().getName() +
-                  " at " + CellReferenceHelper.getCellReference(col, row));
     }
   }
 
@@ -1581,9 +1551,6 @@ final class SheetReader
         }
         else
         {
-          logger.warn("Not able to add comment to cell type " +
-                      c.getClass().getName() +
-                      " at " + CellReferenceHelper.getCellReference(col, row));
         }
       }
     }
@@ -1602,8 +1569,6 @@ final class SheetReader
   {
     if (msoRecord == null)
     {
-      logger.warn("Object record is not associated with a drawing " +
-                  " record - ignoring");
       return;
     }
     
@@ -1785,10 +1750,6 @@ final class SheetReader
       // Non-supported types which have multiple record types
       if (objRecord.getType() == ObjRecord.TEXT)
       {
-        logger.warn(objRecord.getType() + " Object on sheet \"" +
-                    sheet.getName() +
-                    "\" not supported - omitting");
-
         // Still need to add the drawing data to preserve the hierarchy
         if (drawingData == null)
         {
@@ -1822,9 +1783,6 @@ final class SheetReader
       // Handle other types
       if (objRecord.getType() != ObjRecord.CHART)
       {
-        logger.warn(objRecord.getType() + " Object on sheet \"" +
-                    sheet.getName() +
-                    "\" not supported - omitting");
 
         // Still need to add the drawing data to preserve the hierarchy
         if (drawingData == null)
@@ -1845,8 +1803,6 @@ final class SheetReader
     }
     catch (DrawingDataException e)
     {
-      logger.warn(e.getMessage() + 
-                  "...disabling drawings for the remainder of the workbook");
       workbookSettings.setDrawingsDisabled(true);
     }
   }

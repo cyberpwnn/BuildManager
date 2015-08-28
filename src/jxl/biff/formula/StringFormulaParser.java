@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
-import jxl.common.Logger;
-
 import jxl.WorkbookSettings;
 import jxl.biff.WorkbookMethods;
 
@@ -38,7 +36,6 @@ class StringFormulaParser implements Parser
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(StringFormulaParser.class);
 
   /**
    * The formula string passed to this object
@@ -254,8 +251,6 @@ class StringFormulaParser implements Parser
 
     if (!stack.empty() || !operators.empty() )
     {
-      logger.warn("Formula " + formula + 
-                  " has a non-empty parse stack");
     }
 
     return rt;
@@ -286,7 +281,6 @@ class StringFormulaParser implements Parser
     }
     catch (IOException e)
     {
-      logger.warn(e.toString());
     }
     catch (Error e)
     {

@@ -19,7 +19,6 @@
 
 package jxl.biff.drawing;
 
-import jxl.common.Logger;
 
 import jxl.biff.IntegerHelper;
 
@@ -31,7 +30,6 @@ class Sp extends EscherAtom
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(Sp.class);
 
   /**
    * The binary data

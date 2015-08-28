@@ -20,7 +20,6 @@
 package jxl.write.biff;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.Cell;
 import jxl.CellFeatures;
@@ -55,7 +54,6 @@ public abstract class CellValue extends WritableRecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(CellValue.class);
   
   /**
    * The row in the worksheet at which this cell is located
@@ -352,7 +350,6 @@ public abstract class CellValue extends WritableRecordData
 
       if (features.hasDropDown())
       {
-        logger.warn("need to change value for drop down drawing");
       }
     }
   }
@@ -476,8 +473,6 @@ public abstract class CellValue extends WritableRecordData
     }
     catch (NumFormatRecordsException e)
     {
-      logger.warn("Maximum number of format records exceeded.  Using " +
-                  "default format.");
       format = styles.getNormalStyle();
     }
   }
@@ -511,9 +506,7 @@ public abstract class CellValue extends WritableRecordData
   {
     if (features != null) 
     {
-      logger.warn("current cell features for " + 
-                  CellReferenceHelper.getCellReference(this) + 
-                  " not null - overwriting");
+      
 
       // Check to see if the features include a shared data validation
       if (features.hasDataValidation() &&
@@ -521,15 +514,7 @@ public abstract class CellValue extends WritableRecordData
           features.getDVParser().extendedCellsValidation())
       {
         DVParser dvp = features.getDVParser();
-        logger.warn("Cannot add cell features to " + 
-                    CellReferenceHelper.getCellReference(this) + 
-                    " because it is part of the shared cell validation " +
-                    "group " +
-                    CellReferenceHelper.getCellReference(dvp.getFirstColumn(),
-                                                         dvp.getFirstRow()) +
-                    "-" +
-                    CellReferenceHelper.getCellReference(dvp.getLastColumn(),
-                                                         dvp.getLastRow()));
+        
         return;
       }
     }

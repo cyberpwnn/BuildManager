@@ -19,8 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
-
 import jxl.Cell;
 import jxl.CellFeatures;
 import jxl.biff.FormattingRecords;
@@ -38,7 +36,6 @@ public abstract class CellValue extends RecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(CellValue.class);
 
   /**
    * The row number of this cell record
@@ -201,7 +198,6 @@ public abstract class CellValue extends RecordData
   {
     if (features != null)
     {
-      logger.warn("current cell features not null - overwriting");
     }
 
     features = cf;

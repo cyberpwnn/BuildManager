@@ -107,6 +107,22 @@ public class BuildGroup implements Serializable
 				break;
 			}
 		}
+		
+		for(Manager i : managers)
+		{
+			if(i.getManaging().contains(new Integer(id)))
+			{
+				i.getManaging().remove(new Integer(id));
+			}
+		}
+		
+		for(Builder i : builders)
+		{
+			if(i.getAssigned().contains(new Integer(id)))
+			{
+				i.getAssigned().remove(new Integer(id));
+			}
+		}
 	}
 	
 	public void delBuild(String title)
@@ -216,5 +232,35 @@ public class BuildGroup implements Serializable
 	public int newBuildId()
 	{
 		return builds.size() + 1;
+	}
+	
+	public ArrayList<Manager> getManagers(int id)
+	{
+		ArrayList<Manager> mg = new ArrayList<Manager>();
+		
+		for(Manager i : managers)
+		{
+			if(i.getManaging().contains(new Integer(id)))
+			{
+				mg.add(i);
+			}
+		}
+		
+		return mg;
+	}
+	
+	public ArrayList<Builder> getBuilders(int id)
+	{
+		ArrayList<Builder> mg = new ArrayList<Builder>();
+		
+		for(Builder i : builders)
+		{
+			if(i.getAssigned().contains(new Integer(id)))
+			{
+				mg.add(i);
+			}
+		}
+		
+		return mg;
 	}
 }

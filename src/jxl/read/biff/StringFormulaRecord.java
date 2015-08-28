@@ -20,7 +20,6 @@
 package jxl.read.biff;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 
 import jxl.CellType;
@@ -46,7 +45,6 @@ class StringFormulaRecord extends CellValue
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(StringFormulaRecord.class);
 
   /**
    * The last calculated value of the formula

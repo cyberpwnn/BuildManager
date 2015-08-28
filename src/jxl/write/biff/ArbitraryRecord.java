@@ -19,7 +19,6 @@
 
 package jxl.write.biff;
 
-import jxl.common.Logger;
 
 import jxl.biff.Type;
 import jxl.biff.WritableRecordData;
@@ -32,7 +31,6 @@ class ArbitraryRecord extends WritableRecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(ArbitraryRecord.class);
 
   /**
    * The binary data
@@ -50,7 +48,6 @@ class ArbitraryRecord extends WritableRecordData
     super(Type.createType(type));
 
     data = d;
-    logger.warn("ArbitraryRecord of type " + type + " created");
   }
 
   /**

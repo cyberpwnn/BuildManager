@@ -19,8 +19,6 @@
 
 package jxl.biff.drawing;
 
-import jxl.common.Logger;
-
 import jxl.biff.IntegerHelper;
 import jxl.biff.Type;
 import jxl.biff.WritableRecordData;
@@ -34,7 +32,6 @@ public class NoteRecord extends WritableRecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(NoteRecord.class);
 
   /**
    * The raw drawing data which was read in

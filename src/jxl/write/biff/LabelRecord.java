@@ -20,7 +20,6 @@
 package jxl.write.biff;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.CellType;
 import jxl.LabelCell;
@@ -37,7 +36,6 @@ public abstract class LabelRecord extends CellValue
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(LabelRecord.class);  
 
   /**
    * The string

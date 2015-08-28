@@ -19,8 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
-
 import jxl.CellType;
 import jxl.ErrorCell;
 import jxl.ErrorFormulaCell;
@@ -43,9 +41,6 @@ public class SharedErrorFormulaRecord extends BaseSharedFormulaRecord
   /**
    * The logger
    */
-  private static Logger logger = 
-    Logger.getLogger(SharedErrorFormulaRecord.class);
-
   /**
    * The error code of this cell
    */

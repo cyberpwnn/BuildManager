@@ -19,7 +19,6 @@
 
 package jxl.write.biff;
 
-import jxl.common.Logger;
 
 import jxl.ErrorFormulaCell;
 import jxl.biff.FormulaData;
@@ -36,7 +35,6 @@ class ReadErrorFormulaRecord extends ReadFormulaRecord
   implements ErrorFormulaCell
 {
   // The logger
-  private static Logger logger = Logger.getLogger(ReadErrorFormulaRecord.class);
 
   /**
    * Constructor
@@ -102,7 +100,6 @@ class ReadErrorFormulaRecord extends ReadFormulaRecord
     }
     catch(FormulaException e2)
     {
-      logger.warn(e2.getMessage());
     }
     byte[] formulaBytes = parser.getBytes();
     expressiondata = new byte[formulaBytes.length + 16];

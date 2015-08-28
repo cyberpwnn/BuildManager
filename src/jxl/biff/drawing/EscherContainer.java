@@ -22,7 +22,6 @@ package jxl.biff.drawing;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import jxl.common.Logger;
 
 /**
  * An escher container.  This record may contain other escher containers or
@@ -33,7 +32,6 @@ class EscherContainer extends EscherRecord
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(EscherContainer.class);
 
   /**
    * Initialized flag

@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.io.File;
 import java.io.RandomAccessFile;
 
-import jxl.common.Logger;
 
 /**
  * Used to generate the excel biff data using a temporary file.  This
@@ -33,7 +32,6 @@ import jxl.common.Logger;
 class FileDataOutput implements ExcelDataOutput
 {
   // The logger
-  private static Logger logger = Logger.getLogger(FileDataOutput.class);
 
   /** 
    * The temporary file

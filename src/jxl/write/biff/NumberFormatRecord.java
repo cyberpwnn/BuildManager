@@ -19,7 +19,6 @@
 
 package jxl.write.biff;
 
-import jxl.common.Logger;
 
 import jxl.biff.FormatRecord;
 
@@ -31,7 +30,6 @@ public class NumberFormatRecord extends FormatRecord
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(NumberFormatRecord.class);
 
   // Dummy class to specify non validation
   protected static class NonValidatingFormat{public NonValidatingFormat(){}};

@@ -21,7 +21,6 @@ package jxl.write.biff;
 
 import java.text.NumberFormat;
 
-import jxl.common.Logger;
 
 import jxl.NumberFormulaCell;
 import jxl.biff.DoubleHelper;
@@ -37,7 +36,6 @@ class ReadNumberFormulaRecord extends ReadFormulaRecord
   implements NumberFormulaCell
 {
   // The logger
-  private static Logger logger = Logger.getLogger(ReadNumberFormulaRecord.class);
 
   /**
    * Constructor
@@ -94,7 +92,6 @@ class ReadNumberFormulaRecord extends ReadFormulaRecord
     }
     catch(FormulaException e2)
     {
-      logger.warn(e2.getMessage());
     }
     byte[] formulaBytes = parser.getBytes();
     expressiondata = new byte[formulaBytes.length + 16];

@@ -22,8 +22,6 @@ package jxl.read.biff;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import jxl.common.Logger;
-
 import jxl.CellType;
 import jxl.NumberCell;
 import jxl.NumberFormulaCell;
@@ -47,8 +45,6 @@ public class SharedNumberFormulaRecord extends BaseSharedFormulaRecord
   /**
    * The logger
    */
-  private static Logger logger = 
-    Logger.getLogger(SharedNumberFormulaRecord.class);
   /**
    * The value of this number
    */

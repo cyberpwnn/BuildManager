@@ -21,8 +21,6 @@ package jxl.biff.formula;
 
 import java.util.Stack;
 
-import jxl.common.Logger;
-
 import jxl.WorkbookSettings;
 import jxl.biff.IntegerHelper;
 
@@ -35,7 +33,6 @@ class Attribute extends Operator implements ParsedThing
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(Attribute.class);
 
   /**
    * The options used by the attribute

@@ -22,8 +22,6 @@ package jxl.biff.drawing;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import jxl.common.Logger;
-
 import jxl.biff.IntegerHelper;
 import jxl.biff.StringHelper;
 
@@ -35,7 +33,6 @@ class Opt extends EscherAtom
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(Opt.class);
 
   /**
    * The binary data

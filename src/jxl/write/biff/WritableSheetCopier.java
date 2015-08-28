@@ -26,7 +26,6 @@ import java.util.TreeSet;
 import java.util.Iterator;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.BooleanCell;
 import jxl.Cell;
@@ -84,7 +83,6 @@ import jxl.write.WriteException;
  */
 class WritableSheetCopier
 {
-  private static Logger logger = Logger.getLogger(SheetCopier.class);
 
   private WritableSheetImpl fromSheet;
   private WritableSheetImpl toSheet;
@@ -427,22 +425,7 @@ class WritableSheetCopier
       
       if (crossSheetReference)
       {
-        try
-        {
-        logger.warn("Formula " + rfr.getFormula() +
-                    " in cell " + 
-                    CellReferenceHelper.getCellReference(cell.getColumn(),
-                                                         cell.getRow()) +
-                    " cannot be imported because it references another " +
-                    " sheet from the source workbook");
-        }
-        catch (FormulaException e)
-        {
-          logger.warn("Formula  in cell " + 
-                      CellReferenceHelper.getCellReference(cell.getColumn(),
-                                                           cell.getRow()) +
-                      " cannot be imported:  " + e.getMessage());
-        }
+       
         
         // Create a new error formula and add it instead
         c = new Formula(cell.getColumn(), cell.getRow(), "\"ERROR\"");
@@ -589,8 +572,7 @@ class WritableSheetCopier
     }
     catch (NumFormatRecordsException e)
     {
-      logger.warn("Maximum number of format records exceeded.  Using " +
-                  "default format.");
+    
 
       return WritableWorkbook.NORMAL_STYLE;
     }

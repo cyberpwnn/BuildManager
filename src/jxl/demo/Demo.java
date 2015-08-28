@@ -23,8 +23,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-import jxl.common.Logger;
-
 import jxl.Cell;
 import jxl.Range;
 import jxl.Workbook;
@@ -42,7 +40,6 @@ public class Demo
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(Demo.class);
 
   /**
    * Displays the acceptable command line arguments
@@ -88,11 +85,6 @@ public class Demo
 
     if (args[0].equals("-logtest"))
     {
-      logger.debug("A sample \"debug\" message");
-      logger.info("A sample \"info\" message");
-      logger.warn("A sample \"warning\" message");
-      logger.error("A sample \"error\" message");
-      logger.fatal("A sample \"fatal\" message");
       System.exit(0);
     }
 
@@ -301,34 +293,28 @@ public class Demo
    */
   private static void findTest(Workbook w)
   {
-    logger.info("Find test");
 
     Cell c = w.findCellByName("named1");
     if (c != null)
     {
-      logger.info("named1 contents:  " + c.getContents());
     }
 
     c = w.findCellByName("named2");
     if (c != null)
     {
-      logger.info("named2 contents:  " + c.getContents());
     }
 
     c = w.findCellByName("namedrange");
     if (c != null)
     {
-      logger.info("named2 contents:  " + c.getContents());
     }
 
     Range[] range = w.findByName("namedrange");
     if (range != null)
     {
       c = range[0].getTopLeft();
-      logger.info("namedrange top left contents:  " + c.getContents());
 
       c = range[0].getBottomRight();
-      logger.info("namedrange bottom right contents:  " + c.getContents());
     }
 
     range = w.findByName("nonadjacentrange");
@@ -337,10 +323,8 @@ public class Demo
       for (int i = 0; i < range.length; i++)
       {
         c = range[i].getTopLeft();
-        logger.info("nonadjacent top left contents:  " + c.getContents());
         
         c = range[i].getBottomRight();
-        logger.info("nonadjacent bottom right contents:  " + c.getContents());
       }
     }
 
@@ -350,12 +334,8 @@ public class Demo
       for (int i = 0; i < range.length; i++)
       {
         c = range[i].getTopLeft();
-        logger.info("horizontalnonadjacent top left contents:  " + 
-                           c.getContents());
         
         c = range[i].getBottomRight();
-        logger.info("horizontalnonadjacent bottom right contents:  " + 
-                 c.getContents());
       }
     }
 

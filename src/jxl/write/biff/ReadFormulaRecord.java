@@ -20,7 +20,6 @@
 package jxl.write.biff;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.CellReferenceHelper;
 import jxl.CellType;
@@ -48,7 +47,6 @@ class ReadFormulaRecord extends CellValue implements FormulaData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(ReadFormulaRecord.class);
 
   /**
    * The underlying formula from the read sheet
@@ -100,7 +98,6 @@ class ReadFormulaRecord extends CellValue implements FormulaData
     }
     catch(FormulaException e2)
     {
-      logger.warn(e2.getMessage());
       parser = new FormulaParser("\"ERROR\"", w, w, w.getSettings());
       try {parser.parse();} 
       catch(FormulaException e3) {Assert.verify(false);}
@@ -163,9 +160,7 @@ class ReadFormulaRecord extends CellValue implements FormulaData
     {
       // Something has gone wrong trying to read the formula data eg. it
       // might be unsupported biff7 data
-      logger.warn
-        (CellReferenceHelper.getCellReference(getColumn(), getRow()) + 
-         " " + e.getMessage());
+      
       return handleFormulaException();
     }
   }
@@ -287,7 +282,6 @@ class ReadFormulaRecord extends CellValue implements FormulaData
     }
     catch (FormulaException e)
     {
-      logger.warn("cannot insert column within formula:  " + e.getMessage());
     }
   }
 
@@ -321,7 +315,6 @@ class ReadFormulaRecord extends CellValue implements FormulaData
     }
     catch (FormulaException e)
     {
-      logger.warn("cannot remove column within formula:  " + e.getMessage());
     }
   }
 
@@ -355,7 +348,6 @@ class ReadFormulaRecord extends CellValue implements FormulaData
     }
     catch (FormulaException e)
     {
-      logger.warn("cannot insert row within formula:  " + e.getMessage());
     }
   }
 
@@ -389,7 +381,6 @@ class ReadFormulaRecord extends CellValue implements FormulaData
     }
     catch (FormulaException e)
     {
-      logger.warn("cannot remove row within formula:  " + e.getMessage());
     }
   }
 
@@ -441,7 +432,6 @@ class ReadFormulaRecord extends CellValue implements FormulaData
     }
     catch (FormulaException e)
     {
-      logger.warn("cannot import formula:  " + e.getMessage());
       return false;
     }
   }

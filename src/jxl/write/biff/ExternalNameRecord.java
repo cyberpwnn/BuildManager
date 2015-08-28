@@ -19,7 +19,6 @@
 
 package jxl.write.biff;
 
-import jxl.common.Logger;
 
 import jxl.biff.StringHelper;
 import jxl.biff.Type;
@@ -34,7 +33,6 @@ class ExternalNameRecord extends WritableRecordData
   /**
    * The logger
    */
-  Logger logger = Logger.getLogger(ExternalNameRecord.class);
 
   /**
    * The name of the addin

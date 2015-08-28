@@ -19,7 +19,6 @@
 
 package jxl.write.biff;
 
-import jxl.common.Logger;
 
 import jxl.Cell;
 import jxl.CellType;
@@ -34,7 +33,6 @@ public abstract class BlankRecord extends CellValue
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(BlankRecord.class);
 
   /**
    * Consructor used when creating a label from the user API

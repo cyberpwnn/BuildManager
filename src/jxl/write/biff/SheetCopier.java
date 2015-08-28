@@ -26,7 +26,6 @@ import java.util.TreeSet;
 import java.util.Iterator;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.BooleanCell;
 import jxl.Cell;
@@ -84,7 +83,6 @@ import jxl.write.WriteException;
  */
 class SheetCopier
 {
-  private static Logger logger = Logger.getLogger(SheetCopier.class);
 
   private SheetImpl fromSheet;
   private WritableSheetImpl toSheet;
@@ -403,7 +401,6 @@ class SheetCopier
     {
       if (fromSheet.getWorkbookBof().isBiff7())
       {
-        logger.warn("Cannot copy Biff7 print settings record - ignoring");
       }
       else
       {
@@ -650,7 +647,6 @@ class SheetCopier
     Chart[] fromCharts = fromSheet.getCharts();
     if (fromCharts != null && fromCharts.length > 0)
     {
-      logger.warn("Importing of charts is not supported");
       /*
       sheetWriter.setCharts(fromSheet.getCharts());
       IndexMapping xfMapping = new IndexMapping(200);
@@ -773,7 +769,6 @@ class SheetCopier
     {
       if (fromSheet.getWorkbookBof().isBiff7())
       {
-        logger.warn("Cannot copy Biff7 print settings record - ignoring");
       }
       else
       {
@@ -877,23 +872,6 @@ class SheetCopier
       
       if (crossSheetReference)
       {
-        try
-        {
-        logger.warn("Formula " + rfr.getFormula() +
-                    " in cell " + 
-                    CellReferenceHelper.getCellReference(cell.getColumn(),
-                                                         cell.getRow()) +
-                    " cannot be imported because it references another " +
-                    " sheet from the source workbook");
-        }
-        catch (FormulaException e)
-        {
-          logger.warn("Formula  in cell " + 
-                      CellReferenceHelper.getCellReference(cell.getColumn(),
-                                                           cell.getRow()) +
-                      " cannot be imported:  " + e.getMessage());
-        }
-        
         // Create a new error formula and add it instead
         c = new Formula(cell.getColumn(), cell.getRow(), "\"ERROR\"");
       }
@@ -1039,9 +1017,7 @@ class SheetCopier
     }
     catch (NumFormatRecordsException e)
     {
-      logger.warn("Maximum number of format records exceeded.  Using " +
-                  "default format.");
-
+ 
       return WritableWorkbook.NORMAL_STYLE;
     }
   }
@@ -1080,8 +1056,6 @@ class SheetCopier
           }
           else
           {
-            logger.warn("Named range " + name + 
-                        " is already present in the destination workbook");
           }
                                  
         }

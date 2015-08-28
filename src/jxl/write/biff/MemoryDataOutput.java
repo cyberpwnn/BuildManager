@@ -22,7 +22,6 @@ package jxl.write.biff;
 import java.io.OutputStream;
 import java.io.IOException;
 
-import jxl.common.Logger;
 
 /**
  * Used to generate the excel biff data in memory.  This class wraps a byte
@@ -31,7 +30,6 @@ import jxl.common.Logger;
 class MemoryDataOutput implements ExcelDataOutput
 {
   // The logger
-  private static Logger logger = Logger.getLogger(MemoryDataOutput.class);
 
   /**
    * The excel data

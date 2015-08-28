@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import jxl.common.Logger;
 
 import jxl.Cell;
 import jxl.CellReferenceHelper;
@@ -70,7 +69,6 @@ public class ReadWrite
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(ReadWrite.class);
 
   /**
    * The spreadsheet to read in
@@ -91,9 +89,6 @@ public class ReadWrite
   {
     inputWorkbook = new File(input);
     outputWorkbook = new File(output);
-    logger.setSuppressWarnings(Boolean.getBoolean("jxl.nowarnings"));
-    logger.info("Input file:  " + input);    
-    logger.info("Output file:  " + output);
   }
 
   /**
@@ -104,10 +99,8 @@ public class ReadWrite
    */
   public void readWrite() throws IOException, BiffException, WriteException
   {
-    logger.info("Reading...");
     Workbook w1 = Workbook.getWorkbook(inputWorkbook);
 
-    logger.info("Copying...");
     WritableWorkbook w2 = Workbook.createWorkbook(outputWorkbook, w1);
 
     if (inputWorkbook.getName().equals("jxlrwtest.xls"))
@@ -117,7 +110,6 @@ public class ReadWrite
 
     w2.write();
     w2.close();
-    logger.info("Done");
   }
 
   /**
@@ -128,7 +120,6 @@ public class ReadWrite
    */
   private void modify(WritableWorkbook w) throws WriteException
   {
-    logger.info("Modifying...");
 
     WritableSheet sheet = w.getSheet("modified");
     
@@ -273,7 +264,6 @@ public class ReadWrite
         }
         catch (MalformedURLException e)
         {
-          logger.warn(e.toString());
         }
       }
       else if (wh.getColumn() == 1 && wh.getRow() == 40)

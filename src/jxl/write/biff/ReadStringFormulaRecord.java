@@ -20,7 +20,6 @@
 package jxl.write.biff;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.StringFormulaCell;
 import jxl.biff.FormulaData;
@@ -35,7 +34,6 @@ class ReadStringFormulaRecord extends ReadFormulaRecord
   implements StringFormulaCell
 {
   // the logger
-  private static Logger logger = Logger.getLogger(ReadFormulaRecord.class);
 
   /**
    * Constructor
@@ -81,7 +79,6 @@ class ReadStringFormulaRecord extends ReadFormulaRecord
     }
     catch(FormulaException e2)
     {
-      logger.warn(e2.getMessage());
       parser = new FormulaParser("\"ERROR\"", w, w, w.getSettings());
       try {parser.parse();} 
       catch(FormulaException e3) {Assert.verify(false);}

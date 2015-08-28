@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.Range;
 import jxl.Sheet;
@@ -65,7 +64,6 @@ public class WritableWorkbookImpl extends WritableWorkbook
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(WritableWorkbookImpl.class);
   /**
    * The list of formats available within this workbook
    */
@@ -298,7 +296,6 @@ public class WritableWorkbookImpl extends WritableWorkbook
         {
           if (readSupbook.getType() != readSupbook.ADDIN)
           {
-            logger.warn("unsupported supbook type - ignoring");
           }
         }
       }
@@ -335,7 +332,6 @@ public class WritableWorkbookImpl extends WritableWorkbook
         }
         else
         {
-          logger.warn("Cannot copy Biff7 name records - ignoring");
         }
       }
     }
@@ -862,9 +858,7 @@ public class WritableWorkbookImpl extends WritableWorkbook
         CountryCode.getCountryCode(settings.getExcelDisplayLanguage());
       if (lang == CountryCode.UNKNOWN)
       {
-        logger.warn("Unknown country code " + 
-                    settings.getExcelDisplayLanguage() + 
-                    " using " + CountryCode.USA.getCode());
+      
         lang = CountryCode.USA;
       }
       CountryCode region = 
@@ -872,9 +866,7 @@ public class WritableWorkbookImpl extends WritableWorkbook
       countryRecord = new CountryRecord(lang, region);
       if (region == CountryCode.UNKNOWN)
       {
-        logger.warn("Unknown country code " + 
-                    settings.getExcelDisplayLanguage() + 
-                    " using " + CountryCode.UK.getCode());
+       
         region = CountryCode.UK;
       }
     }
@@ -1080,7 +1072,6 @@ public class WritableWorkbookImpl extends WritableWorkbook
     }
     
     // An unknown supbook - return unkown
-    logger.warn("Unknown Supbook 1");
     return "[UNKNOWN]";
   }
 
@@ -1110,7 +1101,6 @@ public class WritableWorkbookImpl extends WritableWorkbook
     }
     
     // An unknown supbook - return unkown
-    logger.warn("Unknown Supbook 2");
     return "[UNKNOWN]";
   }
 
@@ -1209,7 +1199,6 @@ public class WritableWorkbookImpl extends WritableWorkbook
       if (supbook.getType() != SupbookRecord.INTERNAL ||
           supbook.getNumberOfSheets() != getNumberOfSheets())
       {
-        logger.warn("Cannot find sheet " + sheetName + " in supbook record");
       }
       
       return externSheet.getIndex(0, sheetpos);
@@ -1222,7 +1211,6 @@ public class WritableWorkbookImpl extends WritableWorkbook
     if (closeSquareBracketsIndex == -1 ||
         openSquareBracketsIndex == -1)
     {
-      logger.warn("Square brackets");
       return -1;
     }
 
@@ -1683,7 +1671,6 @@ public class WritableWorkbookImpl extends WritableWorkbook
       names.remove(pos);
       if (nameRecords.remove(name) == null)
       {
-        logger.warn("Could not remove " + name + " from index lookups");
       }
     }
   }

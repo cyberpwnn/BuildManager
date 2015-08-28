@@ -20,7 +20,6 @@
 package jxl.biff.formula;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.Cell;
 import jxl.WorkbookSettings;
@@ -35,7 +34,6 @@ public class FormulaParser
   /**
    * The logger
    */
-  private static final Logger logger = Logger.getLogger(FormulaParser.class);
 
   /**
    * The formula parser.  The object implementing this interface will either

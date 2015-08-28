@@ -19,7 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
 
 import jxl.biff.IntegerHelper;
 import jxl.biff.RecordData;
@@ -32,7 +31,6 @@ class CodepageRecord extends RecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(CodepageRecord.class);
 
   /**
    * The character encoding

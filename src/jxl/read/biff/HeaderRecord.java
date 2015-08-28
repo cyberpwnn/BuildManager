@@ -19,8 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
-
 import jxl.WorkbookSettings;
 import jxl.biff.IntegerHelper;
 import jxl.biff.RecordData;
@@ -34,7 +32,6 @@ public class HeaderRecord extends RecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(HeaderRecord.class);
 
   /**
    * The footer

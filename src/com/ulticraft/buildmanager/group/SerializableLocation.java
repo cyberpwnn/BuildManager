@@ -82,4 +82,9 @@ public class SerializableLocation implements Serializable
 	{
 		this.world = world;
 	}
+	
+	public String toString()
+	{
+		return this.x + ", " + this.y + ", " + this.z;
+	}
 }

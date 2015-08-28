@@ -22,7 +22,6 @@ package jxl.read.biff;
 import java.util.ArrayList;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.WorkbookSettings;
 import jxl.biff.BuiltInName;
@@ -39,7 +38,6 @@ public class NameRecord extends RecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(NameRecord.class);
 
   /**
    * The name
@@ -340,8 +338,6 @@ public class NameRecord extends RecordData
       else
       {
           String n = name != null ? name : builtInName.getName();
-          logger.warn("Cannot read name ranges for " + n + 
-                      " - setting to empty");
           NameRange range = new NameRange(0,0,0,0,0);
           ranges.add(range);
       }
@@ -351,7 +347,6 @@ public class NameRecord extends RecordData
       // Generate a warning
       // Names are really a nice to have, and we don't want to halt the
       // reading process for functionality that probably won't be used
-      logger.warn("Cannot read name");
       name = "ERROR";
     }
   }
@@ -480,7 +475,6 @@ public class NameRecord extends RecordData
       // Generate a warning
       // Names are really a nice to have, and we don't want to halt the
       // reading process for functionality that probably won't be used
-      logger.warn("Cannot read name.");
       name = "ERROR";
     }
   }

@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import jxl.common.Logger;
 
 import jxl.CellType;
 import jxl.SheetSettings;
@@ -46,7 +45,6 @@ class RowRecord extends WritableRecordData
   /**
    * The logger
    */
-  private static final Logger logger = Logger.getLogger(RowRecord.class);
 
   /**
    * The binary data
@@ -227,10 +225,6 @@ class RowRecord extends WritableRecordData
 
     if (col >= maxColumns)
     {
-      logger.warn("Could not add cell at " + 
-                  CellReferenceHelper.getCellReference(cv.getRow(), 
-                                                       cv.getColumn()) + 
-                  " because it exceeds the maximum column limit");
       return;
     }
 

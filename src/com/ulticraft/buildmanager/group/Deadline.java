@@ -3,55 +3,79 @@ package com.ulticraft.buildmanager.group;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import com.ulticraft.buildmanager.Final;
 
 public class Deadline implements Serializable
 {
 	private static final long serialVersionUID = 4298697384141194814L;
-	
+
 	private Date date;
 	private DateFormat dateFormat;
-	
-	public Deadline(Date date)
+	private String inst;
+
+	@SuppressWarnings("deprecation")
+	public Deadline(String inst)
 	{
-		this.date = date;
 		this.dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
-	}
-	
-	public String format()
-	{
-		return dateFormat.format(date);
-	}
-	
-	public String getDueDate()
-	{
-		Date today = new Date();
-		long diff = today.getTime() - date.getTime();
-		
-		if(diff <= 0)
+
+		try
 		{
-			return "LATE";
+			this.date = new Date(inst);
+			this.inst = inst;
 		}
-		
-		else
+
+		catch(Exception e)
 		{
-			if(diff < 60000)
+			if(inst != null)
 			{
-				return "Due NOW";
-			}
-			
-			else if(diff < 60000 * 60)
-			{
-				return "Due in " + diff / 1000 / 60 + "m";
-			}
-			
-			else if(diff < 60000 * 60 * 24)
-			{
-				return "Due in " + diff / 1000 / 60 / 60 + "h";
+				this.date = new Date(this.inst);
 			}
 			
 			else
 			{
-				return "Due in " + diff / 1000 / 60 / 60 / 24 + "d";
+				this.date = new Date();
+			}
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public Deadline(String inst, CommandSender sender)
+	{
+		this.dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
+
+		try
+		{
+			this.date = new Date(inst);
+			this.inst = inst;
+		}
+
+		catch(Exception e)
+		{
+			sender.sendMessage(Final.TAG + ChatColor.RED + "/bm due " + ChatColor.UNDERLINE + "<MM/DD/YY>");
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public String format()
+	{
+		try
+		{
+			return dateFormat.format(date);
+		}
+		
+		catch(Exception e)
+		{
+			if(inst != null)
+			{
+				date = new Date(inst);
+				return format();
+			}
+			
+			else
+			{
+				return "No Deadline";
 			}
 		}
 	}

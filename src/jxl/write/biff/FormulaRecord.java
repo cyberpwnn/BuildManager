@@ -20,7 +20,6 @@
 package jxl.write.biff;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.CellReferenceHelper;
 import jxl.CellType;
@@ -46,7 +45,6 @@ public class FormulaRecord extends CellValue implements FormulaData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(FormulaRecord.class);
 
   /**
    * The formula to parse
@@ -131,7 +129,6 @@ public class FormulaRecord extends CellValue implements FormulaData
     catch (FormulaException e)
     {
       // Fail silently
-      logger.error("", e);
     }
   }
 
@@ -163,11 +160,7 @@ public class FormulaRecord extends CellValue implements FormulaData
     }
     catch (FormulaException e)
     {
-      logger.warn
-        (e.getMessage() + 
-         " when parsing formula " + formulaToParse + " in cell " +
-         getSheet().getName() + "!" + 
-           CellReferenceHelper.getCellReference(getColumn(), getRow()));
+      
 
       try
       {
@@ -181,7 +174,6 @@ public class FormulaRecord extends CellValue implements FormulaData
       catch (FormulaException e2)
       {
         // fail silently
-        logger.error("",e2);
       }
     }
   }
@@ -222,7 +214,6 @@ public class FormulaRecord extends CellValue implements FormulaData
       catch (FormulaException e2)
       {
         // fail silently
-        logger.error("", e2);
       }
     }
   }

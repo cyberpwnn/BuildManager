@@ -19,7 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
 
 import jxl.biff.IntegerHelper;
 import jxl.biff.RecordData;
@@ -33,7 +32,6 @@ public class BOFRecord extends RecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(BOFRecord.class);
 
   /**
    * The code used for biff8 files

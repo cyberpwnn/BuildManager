@@ -20,8 +20,6 @@
 package jxl.biff.formula;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
-
 import jxl.biff.CellReferenceHelper;
 import jxl.biff.IntegerHelper;
 
@@ -33,7 +31,6 @@ class Area extends Operand implements ParsedThing
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(Area.class);
 
   /**
    * The first column

@@ -25,7 +25,6 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.CellType;
 import jxl.Hyperlink;
@@ -51,7 +50,6 @@ public class HyperlinkRecord extends WritableRecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(HyperlinkRecord.class);
 
   /**
    * The first row

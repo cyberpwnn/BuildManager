@@ -22,7 +22,6 @@ package jxl.read.biff;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-import jxl.common.Logger;
 
 import jxl.Cell;
 import jxl.CellType;
@@ -39,7 +38,6 @@ class SharedFormulaRecord
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(SharedFormulaRecord.class);
 
   /**
    * The first row to which this shared formula applies
@@ -159,7 +157,6 @@ class SharedFormulaRecord
     // sheet and excel has not sliced and diced them exclusively
     if (templateFormula == null)
     {
-      logger.warn("Shared formula template formula is null");
       return new Cell[0];
     }
 

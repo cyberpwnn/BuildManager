@@ -19,7 +19,6 @@
 
 package jxl.biff.drawing;
 
-import jxl.common.Logger;
 
 import jxl.biff.IntegerHelper;
 import jxl.biff.Type;
@@ -34,7 +33,6 @@ public class TextObjectRecord extends WritableRecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(TextObjectRecord.class);
 
   /**
    * The raw drawing data which was read in

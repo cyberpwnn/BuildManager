@@ -19,7 +19,6 @@
 
 package jxl.biff.formula;
 
-import jxl.common.Logger;
 
 import jxl.Cell;
 import jxl.biff.CellReferenceHelper;
@@ -32,8 +31,6 @@ import jxl.biff.IntegerHelper;
 class SharedFormulaCellReference extends Operand implements ParsedThing
 {
   // The logger
-  private static Logger logger = 
-    Logger.getLogger(SharedFormulaCellReference.class);
 
   /**
    * Indicates whether the column reference is relative or absolute

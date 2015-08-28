@@ -20,7 +20,6 @@
 package jxl.biff.formula;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.biff.IntegerHelper;
 import jxl.biff.NameRangeException;
@@ -34,7 +33,6 @@ class NameRange extends Operand implements ParsedThing
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(NameRange.class);
 
   /**
    * A handle to the name table

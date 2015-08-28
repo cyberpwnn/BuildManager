@@ -19,8 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
-
 import jxl.biff.IntegerHelper;
 import jxl.biff.RecordData;
 
@@ -32,7 +30,6 @@ class PaneRecord extends RecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(PaneRecord.class);
 
   /**
    * The number of rows visible in the top left pane

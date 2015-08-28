@@ -19,7 +19,6 @@
 
 package jxl.biff.formula;
 
-import jxl.common.Logger;
 
 import jxl.biff.IntegerHelper;
 
@@ -31,7 +30,6 @@ class IntegerValue extends NumberValue implements ParsedThing
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(IntegerValue.class);
 
   /**
    * The value of this integer
@@ -62,7 +60,6 @@ class IntegerValue extends NumberValue implements ParsedThing
     }
     catch (NumberFormatException e)
     {
-      logger.warn(e, e);
       value = 0;
     }
 

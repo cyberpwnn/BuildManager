@@ -2,7 +2,6 @@ package com.ulticraft.buildmanager.group;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Build implements Serializable
 {
@@ -15,6 +14,7 @@ public class Build implements Serializable
 	private SerializableLocation location;
 	private boolean finished;
 	private Deadline deadline;
+	private int completed;
 	
 	public Build(int id, String title, String description, ArrayList<Status> updates, SerializableLocation location)
 	{
@@ -24,6 +24,17 @@ public class Build implements Serializable
 		this.updates = updates;
 		this.location = location;
 		this.finished = false;
+		this.completed = 0;
+	}
+
+	public int getCompleted()
+	{
+		return completed;
+	}
+
+	public void setCompleted(int completed)
+	{
+		this.completed = completed;
 	}
 
 	public int getId()
@@ -91,9 +102,9 @@ public class Build implements Serializable
 		this.finished = finished;
 	}
 	
-	public void setDeadline(Date date)
+	public void setDeadline(Deadline deadline)
 	{
-		deadline = new Deadline(date);
+		this.deadline = deadline;
 	}
 	
 	public Deadline getDeadline()

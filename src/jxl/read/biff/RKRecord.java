@@ -22,7 +22,6 @@ package jxl.read.biff;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import jxl.common.Logger;
 
 import jxl.CellType;
 import jxl.NumberCell;
@@ -37,7 +36,6 @@ class RKRecord extends CellValue implements NumberCell
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(RKRecord.class);
 
   /**
    * The value

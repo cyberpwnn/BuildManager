@@ -22,8 +22,6 @@ package jxl.read.biff;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import jxl.common.Logger;
-
 import jxl.CellType;
 import jxl.NumberCell;
 import jxl.NumberFormulaCell;
@@ -44,7 +42,6 @@ class NumberFormulaRecord extends CellValue
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(NumberFormulaRecord.class);
 
   /**
    * The last calculated value of the formula

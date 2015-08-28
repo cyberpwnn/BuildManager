@@ -20,7 +20,6 @@
 package jxl.read.biff;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.CellType;
 import jxl.WorkbookSettings;
@@ -38,7 +37,6 @@ class FormulaRecord extends CellValue
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(FormulaRecord.class);
 
   /**
    * The "real" formula record - will be either a string a or a number

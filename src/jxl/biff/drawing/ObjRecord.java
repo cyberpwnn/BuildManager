@@ -20,7 +20,6 @@
 package jxl.biff.drawing;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.biff.IntegerHelper;
 import jxl.biff.Type;
@@ -36,7 +35,6 @@ public class ObjRecord extends WritableRecordData
   /**
    * The logger
    */
-  private static final Logger logger = Logger.getLogger(ObjRecord.class);
 
   /**
    * The object type
@@ -146,7 +144,6 @@ public class ObjRecord extends WritableRecordData
 
     if (type == UNKNOWN)
     {
-      logger.warn("unknown object type code " + objtype);
     }
 
     objectId = IntegerHelper.getInt(data[6], data[7]);

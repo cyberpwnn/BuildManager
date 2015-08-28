@@ -19,7 +19,6 @@
 
 package jxl.biff.drawing;
 
-import jxl.common.Logger;
 
 import jxl.biff.Type;
 import jxl.biff.WritableRecordData;
@@ -34,7 +33,6 @@ public class MsoDrawingRecord extends WritableRecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(MsoDrawingRecord.class);
 
   /**
    * Flag to indicate whether this is the first drawing on the sheet

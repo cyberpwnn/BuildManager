@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import jxl.common.Logger;
 
 /**
  * A class which contains the function names for the current workbook. The
@@ -35,7 +34,6 @@ public class FunctionNames
   /**
    * The logger class
    */
-  private static Logger logger = Logger.getLogger(FunctionNames.class);
 
   /**
    * A hash mapping keyed on the function and returning its locale specific

@@ -19,7 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
 
 import jxl.biff.DoubleHelper;
 import jxl.biff.IntegerHelper;
@@ -32,7 +31,6 @@ import jxl.biff.Type;
 public class SetupRecord extends RecordData
 {
   // The logger
-  private static Logger logger = Logger.getLogger(SetupRecord.class);
 
   /**
    * The raw data

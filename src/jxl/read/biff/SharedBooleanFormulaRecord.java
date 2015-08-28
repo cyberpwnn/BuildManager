@@ -20,7 +20,6 @@
 package jxl.read.biff;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.BooleanCell;
 import jxl.BooleanFormulaCell;
@@ -43,8 +42,6 @@ public class SharedBooleanFormulaRecord extends BaseSharedFormulaRecord
   /**
    * The logger
    */
-  private static Logger logger = 
-    Logger.getLogger(SharedBooleanFormulaRecord.class);
 
   /**
    * The boolean value of this cell.  If this cell represents an error,

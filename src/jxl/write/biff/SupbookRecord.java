@@ -20,7 +20,6 @@
 package jxl.write.biff;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.WorkbookSettings;
 import jxl.biff.EncodedURLHelper;
@@ -38,7 +37,6 @@ class SupbookRecord extends WritableRecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(SupbookRecord.class);
 
   /**
    * The type of this supbook record
@@ -148,7 +146,6 @@ class SupbookRecord extends WritableRecordData
 
     if (sr.getType() == sr.ADDIN)
     {
-      logger.warn("Supbook type is addin");
     }
   }
 
@@ -259,7 +256,6 @@ class SupbookRecord extends WritableRecordData
     }
     else
     {
-      logger.warn("unsupported supbook type - defaulting to internal");
       initInternal();
     }
 

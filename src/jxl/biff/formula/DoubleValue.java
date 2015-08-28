@@ -19,7 +19,6 @@
 
 package jxl.biff.formula;
 
-import jxl.common.Logger;
 
 import jxl.biff.DoubleHelper;
 
@@ -31,7 +30,6 @@ class DoubleValue extends NumberValue implements ParsedThing
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(DoubleValue.class);
 
   /**
    * The value of this double in the formula
@@ -69,7 +67,6 @@ class DoubleValue extends NumberValue implements ParsedThing
     }
     catch (NumberFormatException e)
     {
-      logger.warn(e, e);
       value = 0;
     }
   }

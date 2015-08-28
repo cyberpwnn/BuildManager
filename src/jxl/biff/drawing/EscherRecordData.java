@@ -19,8 +19,6 @@
 
 package jxl.biff.drawing;
 
-import jxl.common.Logger;
-
 import jxl.biff.IntegerHelper;
 
 
@@ -33,7 +31,6 @@ final class EscherRecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(EscherRecordData.class);
 
   /**
    * The byte position of this record in the escher stream

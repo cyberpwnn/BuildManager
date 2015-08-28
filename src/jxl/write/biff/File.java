@@ -22,7 +22,6 @@ package jxl.write.biff;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import jxl.common.Logger;
 
 import jxl.WorkbookSettings;
 import jxl.biff.ByteData;
@@ -38,8 +37,6 @@ public final class File
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(File.class);
-
   /**
    * The data from the excel 97 file
    */
@@ -182,7 +179,6 @@ public final class File
   {
     if (data != null)
     {
-      logger.warn("Rewriting a workbook with non-empty data");
     }
 
     outputStream = os;

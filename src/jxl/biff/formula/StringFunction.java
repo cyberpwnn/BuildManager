@@ -19,8 +19,6 @@
 
 package jxl.biff.formula;
 
-import jxl.common.Logger;
-
 import jxl.WorkbookSettings;
 
 /**
@@ -32,7 +30,6 @@ class StringFunction extends StringParseItem
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(StringFunction.class);
 
   /**
    * The function

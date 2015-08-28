@@ -19,7 +19,6 @@
 
 package jxl.write.biff;
 
-import jxl.common.Logger;
 
 import jxl.biff.XFRecord;
 import jxl.write.DateFormat;
@@ -39,7 +38,6 @@ class Styles
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(Styles.class);
 
   /**
    * The default font for Cell formats

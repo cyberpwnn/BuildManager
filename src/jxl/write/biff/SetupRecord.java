@@ -19,7 +19,6 @@
 
 package jxl.write.biff;
 
-import jxl.common.Logger;
 
 import jxl.SheetSettings;
 import jxl.biff.DoubleHelper;
@@ -38,7 +37,6 @@ class SetupRecord extends WritableRecordData
   /**
    * The logger
    */
-  Logger logger = Logger.getLogger(SetupRecord.class);
 
   /**
    * The binary data for output to file

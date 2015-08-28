@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.Cell;
 import jxl.CellFeatures;
@@ -63,7 +62,6 @@ final class SheetWriter
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(SheetWriter.class);
     
   /**
    * A handle to the output file which the binary data is written to
@@ -999,7 +997,6 @@ final class SheetWriter
         catch (WriteException e)
         {
           // just log e.toString(), not the whole stack trace
-          logger.warn(e.toString());  
         }
       }
     }

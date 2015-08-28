@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InterruptedIOException;
 
-import jxl.common.Logger;
 
 import jxl.WorkbookSettings;
 import jxl.biff.BaseCompoundFile;
@@ -39,7 +38,6 @@ public class File
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(File.class);
 
   /**
    * The data from the excel 97 file
@@ -221,8 +219,6 @@ public class File
     }
     catch (ArrayIndexOutOfBoundsException e)
     {
-      logger.error("Array index out of bounds at position " + pos +
-                   " record length " + length);
       throw e;
     }
     return ret;

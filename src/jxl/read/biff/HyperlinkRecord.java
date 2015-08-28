@@ -23,8 +23,6 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import jxl.common.Logger;
-
 import jxl.CellReferenceHelper;
 import jxl.Hyperlink;
 import jxl.Range;
@@ -44,7 +42,6 @@ public class HyperlinkRecord extends RecordData implements Hyperlink
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(HyperlinkRecord.class);
 
   /**
    * The first row
@@ -194,7 +191,6 @@ public class HyperlinkRecord extends RecordData implements Hyperlink
       }
       catch (MalformedURLException e)
       {
-        logger.warn("URL " + urlString + " is malformed.  Trying a file");
         try
         {
           linkType = fileLink;
@@ -202,7 +198,6 @@ public class HyperlinkRecord extends RecordData implements Hyperlink
         }
         catch (Exception e3)
         {
-          logger.warn("Cannot set to file.  Setting a default URL");
 
           // Set a default URL
           try
@@ -224,7 +219,6 @@ public class HyperlinkRecord extends RecordData implements Hyperlink
         CellReferenceHelper.getCellReference(lastColumn, lastRow, sb2);
         sb1.insert(0, "Exception when parsing URL ");
         sb1.append('\"').append(sb2.toString()).append("\".  Using default.");
-        logger.warn(sb1, e);
 
         // Set a default URL
         try
@@ -267,8 +261,6 @@ public class HyperlinkRecord extends RecordData implements Hyperlink
       }
       catch (Throwable e)
       {
-        logger.warn("Exception when parsing file " + 
-                    e.getClass().getName() + ".");
         file = new File(".");
       }
     }
@@ -280,7 +272,6 @@ public class HyperlinkRecord extends RecordData implements Hyperlink
     else
     {
       // give up
-      logger.warn("Cannot determine link type");
       return;
     }
   }

@@ -27,7 +27,6 @@ import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import jxl.common.Assert;
-import jxl.common.Logger;
 
 import jxl.BooleanCell;
 import jxl.Cell;
@@ -91,7 +90,6 @@ class WritableSheetImpl implements WritableSheet
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(WritableSheetImpl.class);
     
   /**
    * The name of this sheet
@@ -1163,14 +1161,7 @@ class WritableSheetImpl implements WritableSheet
         curSharedValidation)
     {
       DVParser dvp = curcell.getCellFeatures().getDVParser();
-      logger.warn("Cannot add cell at " + 
-                  CellReferenceHelper.getCellReference(cv) + 
-                  " because it is part of the shared cell validation group " +
-                  CellReferenceHelper.getCellReference(dvp.getFirstColumn(),
-                                                       dvp.getFirstRow()) +
-                  "-" +
-                  CellReferenceHelper.getCellReference(dvp.getLastColumn(),
-                                                       dvp.getLastRow()));
+
       return;
     }
 
@@ -1413,8 +1404,6 @@ class WritableSheetImpl implements WritableSheet
     }
     catch (NumFormatRecordsException e)
     {
-      logger.warn("Maximum number of format records exceeded.  Using " +
-                  "default format.");
 
       ColumnInfoRecord cir = new ColumnInfoRecord
         (col, view.getDimension()*256, WritableWorkbook.NORMAL_STYLE);
@@ -1503,8 +1492,6 @@ class WritableSheetImpl implements WritableSheet
     }
     catch (NumFormatRecordsException e)
     {
-      logger.warn("Maximum number of format records exceeded.  Using " +
-                  "default format.");
 
       xfr = null;
     }
@@ -1845,8 +1832,7 @@ class WritableSheetImpl implements WritableSheet
     // First check that the cells make sense
     if (col2 < col1 || row2 < row1)
     {
-      logger.warn("Cannot merge cells - top left and bottom right "+
-                  "incorrectly specified");
+   
     }
 
     // Make sure the spreadsheet is up to size
@@ -1876,8 +1862,7 @@ class WritableSheetImpl implements WritableSheet
   {
     if (row2 < row1)
     {
-      logger.warn("Cannot merge cells - top and bottom rows incorrectly " + 
-                  "specified");
+    
     }
 
     for (int i = row1; i <= row2; i++) 
@@ -1904,15 +1889,13 @@ class WritableSheetImpl implements WritableSheet
   {
     if (row2 < row1)
     {
-      logger.warn("Cannot merge cells - top and bottom rows incorrectly " +
-                  "specified");
+  
     }
 
     // Make sure the spreadsheet is up to size
     if (row2 >= numRows)
     {
-      logger.warn("" + row2 + 
-                  " is greater than the sheet bounds");
+     
       row2 = numRows - 1;
     }
 
@@ -1944,8 +1927,7 @@ class WritableSheetImpl implements WritableSheet
   {
     if (col2 < col1)
     {
-      logger.warn("Cannot merge cells - top and bottom rows incorrectly " +
-                  "specified");
+    
     }
 
     for (int i = col1; i <= col2; i++) 
@@ -1980,8 +1962,7 @@ class WritableSheetImpl implements WritableSheet
   {
     if (col2 < col1)
     {
-      logger.warn("Cannot merge cells - top and bottom rows incorrectly " +
-                  "specified");
+   
     }
 
     for (int i = col1; i <= col2; i++) 
@@ -2416,7 +2397,6 @@ class WritableSheetImpl implements WritableSheet
         message.append(", ");
         message.append(imageTypes[i]);
       }
-      logger.warn(message.toString());
     }
   }
 
@@ -2473,13 +2453,11 @@ class WritableSheetImpl implements WritableSheet
   {
     if (n.length() > maxSheetNameLength)
     {
-      logger.warn("Sheet name " + n + " too long - truncating");
       n = n.substring(0, maxSheetNameLength);
     }
 
     if (n.charAt(0) == '\'')
     {
-      logger.warn("Sheet naming cannot start with \' - removing");
       n = n.substring(1);
     }
 
@@ -2488,8 +2466,6 @@ class WritableSheetImpl implements WritableSheet
       String newname = n.replace(illegalSheetNameCharacters[i], '@');
       if (n != newname)
       {
-        logger.warn(illegalSheetNameCharacters[i] + 
-        " is not a valid character within a sheet name - replacing");
       }
       n = newname;
     }
@@ -2541,8 +2517,6 @@ class WritableSheetImpl implements WritableSheet
 
       if (!result)
       {
-        logger.warn("Could not remove validated cell " + 
-                    CellReferenceHelper.getCellReference(cv));
       }
     }
   }
@@ -2724,10 +2698,6 @@ class WritableSheetImpl implements WritableSheet
     if (c.getWritableCellFeatures() == null ||
         !c.getWritableCellFeatures().hasDataValidation())
     {
-      logger.warn("Cannot extend data validation for " +
-                  CellReferenceHelper.getCellReference(c.getColumn(), 
-                                                       c.getRow()) + 
-                  " as it has no data validation");
       return;
     }
 
@@ -2757,16 +2727,7 @@ class WritableSheetImpl implements WritableSheet
               c2.getWritableCellFeatures() != null &&
               c2.getWritableCellFeatures().hasDataValidation())
           {
-            logger.warn("Cannot apply data validation from " +
-                        CellReferenceHelper.getCellReference(startColumn,
-                                                             startRow) +
-                        " to " + 
-                        CellReferenceHelper.getCellReference
-                          (startColumn + extraCols,
-                           startRow + extraRows) +
-                        " as cell " +
-                        CellReferenceHelper.getCellReference(x, y) +
-                        " already has a data validation");
+            
             return;
           }
         }
@@ -2855,15 +2816,7 @@ class WritableSheetImpl implements WritableSheet
       if (cell.getColumn() != dvp.getFirstColumn() ||
           cell.getRow() != dvp.getFirstRow())
       {
-        logger.warn("Cannot remove data validation from " +
-                    CellReferenceHelper.getCellReference(dvp.getFirstColumn(),
-                                                         dvp.getFirstRow()) +
-                    "-" +
-                    CellReferenceHelper.getCellReference(dvp.getLastColumn(),
-                                                         dvp.getLastRow()) +
-                    " because the selected cell " +
-                    CellReferenceHelper.getCellReference(cell) +
-                    " is not the top left cell in the range");
+        
         return;
       }
     }

@@ -19,7 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
 import jxl.biff.RecordData;
 
 /**
@@ -30,7 +29,6 @@ class TemplateRecord extends RecordData
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(TemplateRecord.class);
 
   /**
    * The template

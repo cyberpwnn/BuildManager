@@ -19,8 +19,6 @@
 
 package jxl.read.biff;
 
-import jxl.common.Logger;
-
 import jxl.Cell;
 import jxl.CellFeatures;
 import jxl.CellType;
@@ -36,7 +34,6 @@ class MulBlankCell implements Cell, CellFeaturesAccessor
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(MulBlankCell.class);
 
   /**
    * The row containing this blank
@@ -199,7 +196,6 @@ class MulBlankCell implements Cell, CellFeaturesAccessor
   {
     if (features != null)
     {
-      logger.warn("current cell features not null - overwriting");
     }
 
     features = cf;

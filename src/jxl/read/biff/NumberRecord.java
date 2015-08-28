@@ -22,8 +22,6 @@ package jxl.read.biff;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import jxl.common.Logger;
-
 import jxl.CellType;
 import jxl.NumberCell;
 import jxl.biff.DoubleHelper;
@@ -38,7 +36,6 @@ class NumberRecord extends CellValue implements NumberCell
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(NumberRecord.class);
 
   /**
    * The value

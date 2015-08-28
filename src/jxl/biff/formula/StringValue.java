@@ -19,7 +19,6 @@
 
 package jxl.biff.formula;
 
-import jxl.common.Logger;
 
 import jxl.WorkbookSettings;
 import jxl.biff.IntegerHelper;
@@ -34,7 +33,6 @@ class StringValue extends Operand implements ParsedThing
   /**
    * The logger
    */
-  private final static Logger logger = Logger.getLogger(StringValue.class);
 
   /**
    * The string value

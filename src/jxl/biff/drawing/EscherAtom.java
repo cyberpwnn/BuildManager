@@ -19,7 +19,6 @@
 
 package jxl.biff.drawing;
 
-import jxl.common.Logger;
 
 /**
  * Class for atoms.  This may be instantiated as is for unknown/uncared about
@@ -30,7 +29,6 @@ class EscherAtom extends EscherRecord
   /**
    * The logger
    */
-  private static Logger logger = Logger.getLogger(EscherAtom.class);
 
   /**
    * Constructor
@@ -59,9 +57,6 @@ class EscherAtom extends EscherRecord
    */
   byte[] getData()
   {
-    logger.warn("escher atom getData called on object of type " +
-                getClass().getName() + " code " +
-                Integer.toString(getType().getValue(), 16));
     return null;
   }
 }
